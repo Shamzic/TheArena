@@ -26,17 +26,17 @@
                     </form>
                     @Html.ActionLink("Recherche Avancée", "Search", "Advanced", new { @class = "nav-link" })
                     <ul class="nav col justify-content-end">
-                        @if (false)
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <li id="username" class="nav-item">Bienvenue <c:out value="@User.Identity.Name" /></li>
+                            <li id="username" class="nav-item">Bienvenue @User.Identity.Name</li>
                             <li>
-                                <a class="btn btn-outline-success my-2 my-sm-0" href="@Url.Action("Logout","User")">Se déconnecter</a>
+                                <a class="btn btn-outline-success my-2 my-sm-0" href="@Url.Action("Logout","Login")">Se déconnecter</a>
                             </li>
                         }
                         else
                         {
                             <li>
-                                <a class="btn btn-outline-success my-2 my-sm-0"  href="@Url.Action("Login","User")">Se connecter</a>
+                                <a class="btn btn-outline-success my-2 my-sm-0"  href="@Url.Action("Index","Login")">Se connecter</a>
                             </li>
                             <li class="nav-item">
                                 @Html.ActionLink("S'enregistrer", "User", "Inscription", new { @class = "nav-link" })
@@ -63,13 +63,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#"><span class="fas fa-gamepad"></span> Jeux</a>
                     </li>
-                    @if (false)
+                    @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Geek")"><span class="fas fa-user-circle"></span> Profil</a>
+                            <a class="nav-link" href="@Url.Action("Index", "Geeks")"><span class="fas fa-user-circle"></span> Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Edit", "Geek")"><span class="fas fa-cog"></span> Paramètres</a>
+                            <a class="nav-link" href="@Url.Action("Edit", "Geeks")"><span class="fas fa-cog"></span> Paramètres</a>
                         </li>
                     }
                 </ul>

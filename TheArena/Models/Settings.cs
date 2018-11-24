@@ -9,7 +9,7 @@ namespace TheArena
     [Table("Settings")]
     public partial class Settings
     {
-        public int SettingId { get; set; }
+        public int SettingsId { get; set; }
 
         public int Geek { get; set; }
 

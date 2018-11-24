@@ -128,8 +128,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GeeksController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Models\Ban.cs" />
-    <Compile Include="Models\Setting.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Division.cs" />
     <Compile Include="Models\FollowGame.cs" />
@@ -237,9 +239,16 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Geeks\Create.cshtml" />
+    <Content Include="Views\Geeks\Delete.cshtml" />
+    <Content Include="Views\Geeks\Details.cshtml" />
+    <Content Include="Views\Geeks\Edit.cshtml" />
+    <Content Include="Views\Geeks\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
