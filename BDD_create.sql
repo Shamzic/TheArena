@@ -39,7 +39,7 @@ CREATE TABLE Visitor (VisitorId INT NOT NULL IDENTITY PRIMARY KEY, Ip varchar(25
 CREATE TABLE Geek (GeekId INT NOT NULL IDENTITY PRIMARY KEY, Username varchar(255) NOT NULL, Name varchar(255), Surname varchar(255), Password varchar(255), Mail varchar(255), Birthdate INT, Deleted BIT);
 CREATE TABLE Result (ResultId INT NOT NULL IDENTITY PRIMARY KEY, Loser INT NOT NULL, Winner INT NOT NULL, Deleted BIT);
 CREATE TABLE Roles (RoleId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Deleted BIT);
-CREATE TABLE Setting (SettingId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Parameter INT NOT NULL, Value varchar(255), Deleted BIT);
+CREATE TABLE Settings (SettingId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Parameter INT NOT NULL, Value varchar(255), Deleted BIT);
 CREATE TABLE Parameter (ParameterId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Preselected varchar(255), Deleted BIT);
 CREATE TABLE RolesGeek (RolesGeekId INT NOT NULL IDENTITY PRIMARY KEY, Role INT NOT NULL, Geek INT NOT NULL, Deleted BIT);
 CREATE TABLE TeamGeek (TeamGeekId INT NOT NULL IDENTITY PRIMARY KEY, Player INT NOT NULL, Team INT NOT NULL, Deleted BIT);

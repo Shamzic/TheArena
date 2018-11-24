@@ -12,7 +12,7 @@ namespace TheArena
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Parameter()
         {
-            Configuration = new HashSet<Setting>();
+            Settings = new HashSet<Settings>();
         }
 
         public int ParameterId { get; set; }
@@ -26,6 +26,6 @@ namespace TheArena
         public bool? Deleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Setting> Configuration { get; set; }
+        public virtual ICollection<Settings> Settings { get; set; }
     }
 }

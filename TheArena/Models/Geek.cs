@@ -13,7 +13,7 @@ namespace TheArena
         public Geek()
         {
             Ban = new HashSet<Ban>();
-            Configuration = new HashSet<Setting>();
+            Settings = new HashSet<Settings>();
             FollowGame = new HashSet<FollowGame>();
             FollowPlayer = new HashSet<FollowPlayer>();
             FollowPlayer1 = new HashSet<FollowPlayer>();
@@ -54,7 +54,7 @@ namespace TheArena
         public virtual ICollection<Ban> Ban { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Setting> Configuration { get; set; }
+        public virtual ICollection<Settings> Settings { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FollowGame> FollowGame { get; set; }

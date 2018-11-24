@@ -72,18 +72,18 @@ INSERT INTO Participation VALUES (NULL, 1, 1, 1, 0);
 INSERT INTO Parameter VALUES ('Langue', 'en', 0);
 INSERT INTO Parameter VALUES ('Messages', 'on', 0);
 
-INSERT INTO Setting VALUES (1, 1, 'fr', 0);
-INSERT INTO Setting VALUES (1, 2, 'on', 0);
-INSERT INTO Setting VALUES (2, 1, 'en', 0);
-INSERT INTO Setting VALUES (2, 2, 'on', 0);
-INSERT INTO Setting VALUES (6, 1, 'en', 0);
-INSERT INTO Setting VALUES (6, 2, 'off', 0);
-INSERT INTO Setting VALUES (3, 1, 'fr', 0);
-INSERT INTO Setting VALUES (3, 2, 'off', 0);
-INSERT INTO Setting VALUES (4, 1, 'fr', 0);
-INSERT INTO Setting VALUES (4, 2, 'on', 0);
-INSERT INTO Setting VALUES (5, 1, 'fr', 1);
-INSERT INTO Setting VALUES (5, 2, 'on', 1);
+INSERT INTO Settings VALUES (1, 1, 'fr', 0);
+INSERT INTO Settings VALUES (1, 2, 'on', 0);
+INSERT INTO Settings VALUES (2, 1, 'en', 0);
+INSERT INTO Settings VALUES (2, 2, 'on', 0);
+INSERT INTO Settings VALUES (6, 1, 'en', 0);
+INSERT INTO Settings VALUES (6, 2, 'off', 0);
+INSERT INTO Settings VALUES (3, 1, 'fr', 0);
+INSERT INTO Settings VALUES (3, 2, 'off', 0);
+INSERT INTO Settings VALUES (4, 1, 'fr', 0);
+INSERT INTO Settings VALUES (4, 2, 'on', 0);
+INSERT INTO Settings VALUES (5, 1, 'fr', 1);
+INSERT INTO Settings VALUES (5, 2, 'on', 1);
 
 INSERT INTO FollowTeam VALUES (4, 1, 0);
 

@@ -13,7 +13,7 @@ namespace TheArena
         }
 
         public virtual DbSet<Ban> Ban { get; set; }
-        public virtual DbSet<Setting> Setting { get; set; }
+        public virtual DbSet<Settings> Settings { get; set; }
         public virtual DbSet<Division> Division { get; set; }
         public virtual DbSet<FollowGame> FollowGame { get; set; }
         public virtual DbSet<FollowPlayer> FollowPlayer { get; set; }
@@ -47,7 +47,7 @@ namespace TheArena
                 .Property(e => e.Commentary)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Setting>()
+            modelBuilder.Entity<Settings>()
                 .Property(e => e.Value)
                 .IsUnicode(false);
 
@@ -134,7 +134,7 @@ namespace TheArena
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Geek>()
-                .HasMany(e => e.Configuration)
+                .HasMany(e => e.Settings)
                 .WithRequired(e => e.Geek1)
                 .HasForeignKey(e => e.Geek)
                 .WillCascadeOnDelete(false);
@@ -224,7 +224,7 @@ namespace TheArena
                 .IsUnicode(false);
 
             modelBuilder.Entity<Parameter>()
-                .HasMany(e => e.Configuration)
+                .HasMany(e => e.Settings)
                 .WithRequired(e => e.Parameter1)
                 .HasForeignKey(e => e.Parameter)
                 .WillCascadeOnDelete(false);

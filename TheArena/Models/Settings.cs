@@ -6,8 +6,8 @@ namespace TheArena
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Setting")]
-    public partial class Setting
+    [Table("Settings")]
+    public partial class Settings
     {
         public int SettingId { get; set; }
 
