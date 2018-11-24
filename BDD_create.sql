@@ -35,14 +35,14 @@ CREATE TABLE Round (RoundId INT NOT NULL IDENTITY PRIMARY KEY, Number INT, Versu
 CREATE TABLE Score (ScoreId INT NOT NULL IDENTITY PRIMARY KEY, Result INT NOT NULL, ScoreType INT NOT NULL, Winner INT, Loser INT, Deleted BIT);
 CREATE TABLE GameType (GameTypeId INT NOT NULL IDENTITY PRIMARY KEY, Initials varchar(255), Name varchar(255), Description varchar(255), Deleted BIT);
 CREATE TABLE ScoreType (ScoreTypeId INT NOT NULL IDENTITY PRIMARY KEY, Initials varchar(255), Name varchar(255), Deleted BIT);
-CREATE TABLE Visitor (Ip varchar(255) NOT NULL, Deleted BIT);
+CREATE TABLE Visitor (VisitorId INT NOT NULL IDENTITY PRIMARY KEY, Ip varchar(255) NOT NULL, Deleted BIT);
 CREATE TABLE Geek (GeekId INT NOT NULL IDENTITY PRIMARY KEY, Username varchar(255) NOT NULL, Name varchar(255), Surname varchar(255), Password varchar(255), Mail varchar(255), Birthdate INT, Deleted BIT);
 CREATE TABLE Result (ResultId INT NOT NULL IDENTITY PRIMARY KEY, Loser INT NOT NULL, Winner INT NOT NULL, Deleted BIT);
 CREATE TABLE Roles (RoleId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Deleted BIT);
-CREATE TABLE Configuration (ConfigurationId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Parameter INT NOT NULL, Value varchar(255), Deleted BIT);
+CREATE TABLE Setting (SettingId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Parameter INT NOT NULL, Value varchar(255), Deleted BIT);
 CREATE TABLE Parameter (ParameterId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Preselected varchar(255), Deleted BIT);
-CREATE TABLE Roles_Geek (RolesGeekId INT NOT NULL IDENTITY PRIMARY KEY, Role INT NOT NULL, Geek INT NOT NULL, Deleted BIT);
-CREATE TABLE Team_Geek (TeamGeekId INT NOT NULL IDENTITY PRIMARY KEY, Player INT NOT NULL, Team INT NOT NULL, Deleted BIT);
+CREATE TABLE RolesGeek (RolesGeekId INT NOT NULL IDENTITY PRIMARY KEY, Role INT NOT NULL, Geek INT NOT NULL, Deleted BIT);
+CREATE TABLE TeamGeek (TeamGeekId INT NOT NULL IDENTITY PRIMARY KEY, Player INT NOT NULL, Team INT NOT NULL, Deleted BIT);
 CREATE TABLE FollowTeam (FollowTeamId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Team INT NOT NULL, Deleted BIT);
 CREATE TABLE FollowPlayer (FollowPlayerId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Player INT NOT NULL, Deleted BIT);
 CREATE TABLE FollowGame (FollowGameId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Game INT NOT NULL, Deleted BIT);

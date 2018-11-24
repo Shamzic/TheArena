@@ -40,12 +40,12 @@ INSERT INTO Geek VALUES ('ElModerator', 'iloveunicorns', 'Jean-Marie', 'Michel',
 INSERT INTO Geek VALUES ('Deleted', 'deleted', 'Deleted', 'Deleted', 'deleted@deleted.com', '20022002', 1);
 INSERT INTO Geek VALUES ('Dendi', 'squirrel321', 'Danil', 'Ishutin', 'danil@ishutin.com', '30121992', 0);
 
-INSERT INTO Roles_Geek VALUES (3, 3, 0);
-INSERT INTO Roles_Geek VALUES (4, 4, 0);
-INSERT INTO Roles_Geek VALUES (5, 4, 0);
-INSERT INTO Roles_Geek VALUES (2, 1, 0);
-INSERT INTO Roles_Geek VALUES (1, 1, 0);
-INSERT INTO Roles_Geek VALUES (1, 6, 0);
+INSERT INTO RolesGeek VALUES (3, 3, 0);
+INSERT INTO RolesGeek VALUES (4, 4, 0);
+INSERT INTO RolesGeek VALUES (5, 4, 0);
+INSERT INTO RolesGeek VALUES (2, 1, 0);
+INSERT INTO RolesGeek VALUES (1, 1, 0);
+INSERT INTO RolesGeek VALUES (1, 6, 0);
 
 INSERT INTO Message VALUES ('ez', 1509493171, 6, 1, 0);
 INSERT INTO Message VALUES ('New phone who dis?', 1514203932, 2, 1, 1);
@@ -59,9 +59,9 @@ INSERT INTO Ban VALUES ('Avertissement ignoré', 2, 1, 3, 0);
 
 INSERT INTO Team VALUES ('PWRRGR', 'Power Rangers', '', 1, 0);
 
-INSERT INTO Team_Geek VALUES (1, 1, 0);
-INSERT INTO Team_Geek VALUES (6, 1, 0);
-INSERT INTO Team_Geek VALUES (2, 1, 1);
+INSERT INTO TeamGeek VALUES (1, 1, 0);
+INSERT INTO TeamGeek VALUES (6, 1, 0);
+INSERT INTO TeamGeek VALUES (2, 1, 1);
 
 INSERT INTO Ranking VALUES (1, 2, 1, 1, 0);
 
@@ -72,18 +72,18 @@ INSERT INTO Participation VALUES (NULL, 1, 1, 1, 0);
 INSERT INTO Parameter VALUES ('Langue', 'en', 0);
 INSERT INTO Parameter VALUES ('Messages', 'on', 0);
 
-INSERT INTO Configuration VALUES (1, 1, 'fr', 0);
-INSERT INTO Configuration VALUES (1, 2, 'on', 0);
-INSERT INTO Configuration VALUES (2, 1, 'en', 0);
-INSERT INTO Configuration VALUES (2, 2, 'on', 0);
-INSERT INTO Configuration VALUES (6, 1, 'en', 0);
-INSERT INTO Configuration VALUES (6, 2, 'off', 0);
-INSERT INTO Configuration VALUES (3, 1, 'fr', 0);
-INSERT INTO Configuration VALUES (3, 2, 'off', 0);
-INSERT INTO Configuration VALUES (4, 1, 'fr', 0);
-INSERT INTO Configuration VALUES (4, 2, 'on', 0);
-INSERT INTO Configuration VALUES (5, 1, 'fr', 1);
-INSERT INTO Configuration VALUES (5, 2, 'on', 1);
+INSERT INTO Setting VALUES (1, 1, 'fr', 0);
+INSERT INTO Setting VALUES (1, 2, 'on', 0);
+INSERT INTO Setting VALUES (2, 1, 'en', 0);
+INSERT INTO Setting VALUES (2, 2, 'on', 0);
+INSERT INTO Setting VALUES (6, 1, 'en', 0);
+INSERT INTO Setting VALUES (6, 2, 'off', 0);
+INSERT INTO Setting VALUES (3, 1, 'fr', 0);
+INSERT INTO Setting VALUES (3, 2, 'off', 0);
+INSERT INTO Setting VALUES (4, 1, 'fr', 0);
+INSERT INTO Setting VALUES (4, 2, 'on', 0);
+INSERT INTO Setting VALUES (5, 1, 'fr', 1);
+INSERT INTO Setting VALUES (5, 2, 'on', 1);
 
 INSERT INTO FollowTeam VALUES (4, 1, 0);
 

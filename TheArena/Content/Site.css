@@ -1,0 +1,73 @@
+﻿.navbar-ta-main{
+    background-color: #4C4D47;
+    color: white;
+}
+
+.navbar-ta-main a {
+    color: white;
+}
+
+.navbar-ta-main-a {
+    color: #AD5559;
+}
+
+.navbar-ta-menu {
+    background-color: #41423D;
+}
+
+.navbar-ta-menu a {
+    color: #888886;
+}
+
+.navbar-ta-menu a:hover {
+    color: white;
+}
+
+.search {
+    background-color: rgb(65, 66, 62) rgba(65, 66, 62, 1);
+    border-color: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+}
+
+.search-button {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+body {
+    background-color: #F1F1F1;
+}
+
+.main-container {
+    background-color: white;
+    box-shadow: 0 0 6.65px 0.35px rgb(0,0,0) rgba(0, 0, 0, 0.25);
+}
+
+/***********************/
+/*    rajout header    */
+/***********************/
+
+#username { /* le nom utilisateur était trop près du bouton "deconnecter" */
+    margin-top: 1.5%;
+    margin-right: 1.5%;
+}
+
+/***********************/
+/* Style de l'accueil '*/
+/***********************/
+
+#titre {
+    margin: 2% 30% 2% 30%;
+    text-align: center;
+    font-size: 150%;
+    background-color: #4C4D47;
+    color: #F1F1F1;
+}
+
+#liste {
+    margin: 1%;
+}
+
+#liste ul {
+    list-style: none;
+}
