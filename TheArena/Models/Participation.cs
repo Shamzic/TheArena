@@ -1,4 +1,4 @@
-namespace TheArena
+namespace TheArena.Models
 {
     using System;
     using System.Collections.Generic;
@@ -13,13 +13,13 @@ namespace TheArena
 
         public int? Place { get; set; }
 
-        public bool? Qualified { get; set; }
+        public bool Qualified { get; set; }
 
         public int Team { get; set; }
 
         public int Tournament { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
 
         public virtual Team Team1 { get; set; }
 

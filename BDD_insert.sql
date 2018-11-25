@@ -69,8 +69,8 @@ INSERT INTO Tournament VALUES ('TI42', 'The International 42', 'Que le meilleur 
 
 INSERT INTO Participation VALUES (NULL, 1, 1, 1, 0);
 
-INSERT INTO Parameter VALUES ('Langue', 'en', 0);
-INSERT INTO Parameter VALUES ('Messages', 'on', 0);
+INSERT INTO Setting VALUES ('Langue', 'en', 0);
+INSERT INTO Setting VALUES ('Messages', 'on', 0);
 
 INSERT INTO Settings VALUES (1, 1, 'fr', 0);
 INSERT INTO Settings VALUES (1, 2, 'on', 0);

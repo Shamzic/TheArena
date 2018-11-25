@@ -1,4 +1,4 @@
-namespace TheArena
+namespace TheArena.Models
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,6 @@ namespace TheArena
         public Geek()
         {
             Ban = new HashSet<Ban>();
-            Settings = new HashSet<Settings>();
             FollowGame = new HashSet<FollowGame>();
             FollowPlayer = new HashSet<FollowPlayer>();
             FollowPlayer1 = new HashSet<FollowPlayer>();
@@ -21,10 +20,11 @@ namespace TheArena
             FollowTournament = new HashSet<FollowTournament>();
             Message = new HashSet<Message>();
             Message1 = new HashSet<Message>();
-            Roles_Geek = new HashSet<RolesGeek>();
+            RolesGeek = new HashSet<RolesGeek>();
+            Settings = new HashSet<Settings>();
             Stats = new HashSet<Stats>();
             Team = new HashSet<Team>();
-            Team_Geek = new HashSet<TeamGeek>();
+            TeamGeek = new HashSet<TeamGeek>();
             Tournament = new HashSet<Tournament>();
         }
 
@@ -45,16 +45,14 @@ namespace TheArena
 
         [StringLength(255)]
         public string Mail { get; set; }
+        [RegularExpression("^[0-3]\\d[01]\\d(?:19|20)\\d{2}$", ErrorMessage = "Merci d'entrer une date correcte.")]
 
         public int? Birthdate { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ban> Ban { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Settings> Settings { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FollowGame> FollowGame { get; set; }
@@ -78,7 +76,10 @@ namespace TheArena
         public virtual ICollection<Message> Message1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RolesGeek> Roles_Geek { get; set; }
+        public virtual ICollection<RolesGeek> RolesGeek { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Settings> Settings { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stats> Stats { get; set; }
@@ -87,7 +88,7 @@ namespace TheArena
         public virtual ICollection<Team> Team { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeamGeek> Team_Geek { get; set; }
+        public virtual ICollection<TeamGeek> TeamGeek { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tournament> Tournament { get; set; }

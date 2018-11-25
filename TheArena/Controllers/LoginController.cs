@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using TheArena.Models;
 
 namespace TheArena.Controllers
 {
@@ -26,8 +27,8 @@ namespace TheArena.Controllers
         {
             if(ModelState.IsValid)
             {
-                Geek foundGeek = context.Geek.Where(g => g.Username == geek.Username && g.Password == geek.Password).FirstOrDefault();
-                if (geek != null)
+                Geek foundGeek = context.Geek.Where(g => g.Username == geek.Username && g.Password == geek.Password && !g.Deleted).FirstOrDefault();
+                if (foundGeek != null)
                 {
                     FormsAuthentication.SetAuthCookie(foundGeek.Username, false);
                     if (String.IsNullOrWhiteSpace(returnUrl) || Url.IsLocalUrl(returnUrl))

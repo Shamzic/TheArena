@@ -1,4 +1,4 @@
-namespace TheArena
+namespace TheArena.Models
 {
     using System;
     using System.Data.Entity;
@@ -13,7 +13,6 @@ namespace TheArena
         }
 
         public virtual DbSet<Ban> Ban { get; set; }
-        public virtual DbSet<Settings> Settings { get; set; }
         public virtual DbSet<Division> Division { get; set; }
         public virtual DbSet<FollowGame> FollowGame { get; set; }
         public virtual DbSet<FollowPlayer> FollowPlayer { get; set; }
@@ -23,7 +22,6 @@ namespace TheArena
         public virtual DbSet<GameType> GameType { get; set; }
         public virtual DbSet<Geek> Geek { get; set; }
         public virtual DbSet<Message> Message { get; set; }
-        public virtual DbSet<Parameter> Parameter { get; set; }
         public virtual DbSet<Participation> Participation { get; set; }
         public virtual DbSet<Period> Period { get; set; }
         public virtual DbSet<Ranking> Ranking { get; set; }
@@ -34,6 +32,8 @@ namespace TheArena
         public virtual DbSet<Round> Round { get; set; }
         public virtual DbSet<Score> Score { get; set; }
         public virtual DbSet<ScoreType> ScoreType { get; set; }
+        public virtual DbSet<Setting> Setting { get; set; }
+        public virtual DbSet<Settings> Settings { get; set; }
         public virtual DbSet<Stats> Stats { get; set; }
         public virtual DbSet<Team> Team { get; set; }
         public virtual DbSet<TeamGeek> TeamGeek { get; set; }
@@ -45,10 +45,6 @@ namespace TheArena
         {
             modelBuilder.Entity<Ban>()
                 .Property(e => e.Commentary)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Settings>()
-                .Property(e => e.Value)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Division>()
@@ -134,12 +130,6 @@ namespace TheArena
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Geek>()
-                .HasMany(e => e.Settings)
-                .WithRequired(e => e.Geek1)
-                .HasForeignKey(e => e.Geek)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Geek>()
                 .HasMany(e => e.FollowGame)
                 .WithRequired(e => e.Geek1)
                 .HasForeignKey(e => e.Geek)
@@ -182,7 +172,13 @@ namespace TheArena
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Geek>()
-                .HasMany(e => e.Roles_Geek)
+                .HasMany(e => e.RolesGeek)
+                .WithRequired(e => e.Geek1)
+                .HasForeignKey(e => e.Geek)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Geek>()
+                .HasMany(e => e.Settings)
                 .WithRequired(e => e.Geek1)
                 .HasForeignKey(e => e.Geek)
                 .WillCascadeOnDelete(false);
@@ -200,7 +196,7 @@ namespace TheArena
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Geek>()
-                .HasMany(e => e.Team_Geek)
+                .HasMany(e => e.TeamGeek)
                 .WithRequired(e => e.Geek)
                 .HasForeignKey(e => e.Player)
                 .WillCascadeOnDelete(false);
@@ -214,20 +210,6 @@ namespace TheArena
             modelBuilder.Entity<Message>()
                 .Property(e => e.Content)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Parameter>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Parameter>()
-                .Property(e => e.Preselected)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Parameter>()
-                .HasMany(e => e.Settings)
-                .WithRequired(e => e.Parameter1)
-                .HasForeignKey(e => e.Parameter)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Period>()
                 .HasMany(e => e.Ban)
@@ -277,7 +259,7 @@ namespace TheArena
                 .IsUnicode(false);
 
             modelBuilder.Entity<Roles>()
-                .HasMany(e => e.Roles_Geek)
+                .HasMany(e => e.RolesGeek)
                 .WithRequired(e => e.Roles)
                 .HasForeignKey(e => e.Role)
                 .WillCascadeOnDelete(false);
@@ -295,6 +277,24 @@ namespace TheArena
                 .WithRequired(e => e.ScoreType1)
                 .HasForeignKey(e => e.ScoreType)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Setting>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Setting>()
+                .Property(e => e.Preselected)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Setting>()
+                .HasMany(e => e.Settings)
+                .WithRequired(e => e.Setting1)
+                .HasForeignKey(e => e.Setting)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Settings>()
+                .Property(e => e.Value)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Team>()
                 .Property(e => e.Initials)
@@ -345,7 +345,7 @@ namespace TheArena
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Team>()
-                .HasMany(e => e.Team_Geek)
+                .HasMany(e => e.TeamGeek)
                 .WithRequired(e => e.Team1)
                 .HasForeignKey(e => e.Team)
                 .WillCascadeOnDelete(false);

@@ -1,4 +1,4 @@
-namespace TheArena
+namespace TheArena.Models
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,6 @@ namespace TheArena
     [Table("Ban")]
     public partial class Ban
     {
-        [Key]
         public int BanId { get; set; }
 
         [StringLength(255)]
@@ -21,7 +20,7 @@ namespace TheArena
 
         public int BanReason { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
 
         public virtual Geek Geek { get; set; }
 

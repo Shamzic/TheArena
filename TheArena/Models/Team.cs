@@ -1,4 +1,4 @@
-namespace TheArena
+namespace TheArena.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace TheArena
             Result = new HashSet<Result>();
             Result1 = new HashSet<Result>();
             Stats = new HashSet<Stats>();
-            Team_Geek = new HashSet<TeamGeek>();
+            TeamGeek = new HashSet<TeamGeek>();
             Versus = new HashSet<Versus>();
             Versus1 = new HashSet<Versus>();
         }
@@ -36,7 +36,7 @@ namespace TheArena
 
         public int Captain { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FollowTeam> FollowTeam { get; set; }
@@ -59,7 +59,7 @@ namespace TheArena
         public virtual ICollection<Stats> Stats { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeamGeek> Team_Geek { get; set; }
+        public virtual ICollection<TeamGeek> TeamGeek { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Versus> Versus { get; set; }

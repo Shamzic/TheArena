@@ -1,4 +1,4 @@
-namespace TheArena
+namespace TheArena.Models
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,16 @@ namespace TheArena
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [Table("RolesGeek")]
     public partial class RolesGeek
     {
-        [Key]
         public int RolesGeekId { get; set; }
 
         public int Role { get; set; }
 
         public int Geek { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
 
         public virtual Geek Geek1 { get; set; }
 

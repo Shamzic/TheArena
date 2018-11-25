@@ -1,4 +1,4 @@
-namespace TheArena
+namespace TheArena.Models
 {
     using System;
     using System.Collections.Generic;
@@ -9,11 +9,12 @@ namespace TheArena
     [Table("Visitor")]
     public partial class Visitor
     {
-        [Key]
         public int VisitorId { get; set; }
+
+        [Required]
         [StringLength(255)]
         public string Ip { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TheArena;
+using TheArena.Models;
 
 namespace TheArena.Controllers
 {
@@ -18,7 +19,11 @@ namespace TheArena.Controllers
         // GET: Geeks
         public ActionResult Index()
         {
-            return View(db.Geek.ToList());
+            Geek loggedGeek = db.Geek.Where(g => g.Username == User.Identity.Name).FirstOrDefault();
+            if (loggedGeek.RolesGeek.Any(r => r.Roles.Name == "Admin" && r.Roles.Deleted != true))
+                return View(db.Geek.ToList());
+            else
+                return RedirectToAction("Details", new { id = loggedGeek.GeekId });
         }
 
         // GET: Geeks/Details/5
