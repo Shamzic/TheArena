@@ -43,6 +43,25 @@ namespace TheArena.Controllers
         }
 
         [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "GeekId,Username,Name,Surname,Password,Mail,Birthdate,Deleted")] Geek geek)
+        {
+            geek.Deleted = false;
+            if(ModelState.IsValid)
+            {
+                context.Geek.Add(geek);
+                context.SaveChanges();
+                return Redirect("Index");
+            }
+            return View(geek);
+        }
+
+        [HttpGet]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
