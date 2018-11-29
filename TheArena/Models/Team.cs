@@ -18,6 +18,7 @@ namespace TheArena.Models
             Result = new HashSet<Result>();
             Result1 = new HashSet<Result>();
             Stats = new HashSet<Stats>();
+            TeamTag = new HashSet<TeamTag>();
             TeamGeek = new HashSet<TeamGeek>();
             Versus = new HashSet<Versus>();
             Versus1 = new HashSet<Versus>();
@@ -57,6 +58,9 @@ namespace TheArena.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stats> Stats { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeamTag> TeamTag { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeamGeek> TeamGeek { get; set; }

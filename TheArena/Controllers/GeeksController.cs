@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TheArena;
+using TheArena.Annotation;
 using TheArena.Models;
 
 namespace TheArena.Controllers
@@ -27,12 +28,8 @@ namespace TheArena.Controllers
         }
 
         // GET: Geeks/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Geek geek = db.Geek.Find(id);
             if (geek == null)
             {
@@ -64,14 +61,14 @@ namespace TheArena.Controllers
             return View(geek);
         }
 
-        // GET: Geeks/Edit/5
-        public ActionResult Edit(int? id)
+        [EditGeekAuthorized]
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Geek geek = db.Geek.Find(id);
+            Geek geek = db.Geek.Where(p => p.Username == id).FirstOrDefault();
             if (geek == null)
             {
                 return HttpNotFound();
@@ -83,6 +80,7 @@ namespace TheArena.Controllers
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [EditGeekAuthorized]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "GeekId,Username,Name,Surname,Password,Mail,Birthdate,Deleted")] Geek geek)
         {

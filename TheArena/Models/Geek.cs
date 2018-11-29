@@ -32,6 +32,7 @@ namespace TheArena.Models
 
         [Required]
         [StringLength(255)]
+        [Index(IsUnique = true)]
         public string Username { get; set; }
 
         [StringLength(255)]
@@ -44,10 +45,13 @@ namespace TheArena.Models
         public string Password { get; set; }
 
         [StringLength(255)]
+        [Index(IsUnique = true)]
+        [RegularExpression(@"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$", ErrorMessage = "Merci de vérfier le format de l'adresse mail.")]
         public string Mail { get; set; }
-        [RegularExpression("^[0-3]\\d[01]\\d(?:19|20)\\d{2}$", ErrorMessage = "Merci d'entrer une date correcte.")]
 
-        public int? Birthdate { get; set; }
+        [StringLength(10)]
+        [RegularExpression(@"^(?:19|20)\d{2}-[01]\d-[0-3]\d$", ErrorMessage = "Merci d'entrer une date correcte.")]
+        public string Birthdate { get; set; }
 
         public bool Deleted { get; set; }
 

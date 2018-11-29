@@ -37,7 +37,10 @@ namespace TheArena.Models
         public virtual DbSet<Stats> Stats { get; set; }
         public virtual DbSet<Team> Team { get; set; }
         public virtual DbSet<TeamGeek> TeamGeek { get; set; }
+        public virtual DbSet<TeamTag> TeamTag { get; set; }
         public virtual DbSet<Tournament> Tournament { get; set; }
+        public virtual DbSet<TournamentLog> TournamentLog { get; set; }
+        public virtual DbSet<TournamentTag> TournamentTag { get; set; }
         public virtual DbSet<Versus> Versus { get; set; }
         public virtual DbSet<Visitor> Visitor { get; set; }
 
@@ -121,6 +124,10 @@ namespace TheArena.Models
 
             modelBuilder.Entity<Geek>()
                 .Property(e => e.Mail)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Geek>()
+                .Property(e => e.Birthdate)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Geek>()
@@ -345,6 +352,12 @@ namespace TheArena.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Team>()
+                .HasMany(e => e.TeamTag)
+                .WithRequired(e => e.Team1)
+                .HasForeignKey(e => e.Team)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Team>()
                 .HasMany(e => e.TeamGeek)
                 .WithRequired(e => e.Team1)
                 .HasForeignKey(e => e.Team)
@@ -359,6 +372,10 @@ namespace TheArena.Models
                 .HasMany(e => e.Versus1)
                 .WithOptional(e => e.Team3)
                 .HasForeignKey(e => e.Team2);
+
+            modelBuilder.Entity<TeamTag>()
+                .Property(e => e.Tag)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Tournament>()
                 .Property(e => e.Initials)
@@ -389,10 +406,30 @@ namespace TheArena.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Tournament>()
+                .HasMany(e => e.TournamentLog)
+                .WithRequired(e => e.Tournament1)
+                .HasForeignKey(e => e.Tournament)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Tournament>()
+                .HasMany(e => e.TournamentTag)
+                .WithRequired(e => e.Tournament1)
+                .HasForeignKey(e => e.Tournament)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Tournament>()
                 .HasMany(e => e.Versus)
                 .WithRequired(e => e.Tournament1)
                 .HasForeignKey(e => e.Tournament)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TournamentLog>()
+                .Property(e => e.Entry)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<TournamentTag>()
+                .Property(e => e.Tag)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Versus>()
                 .HasMany(e => e.Round)
