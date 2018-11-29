@@ -19,6 +19,8 @@ namespace TheArena.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+                return Redirect("/");
             return View();
         }
 
