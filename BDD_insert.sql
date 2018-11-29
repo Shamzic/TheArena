@@ -92,3 +92,16 @@ INSERT INTO FollowPlayer VALUES (1, 6, 0);
 INSERT INTO FollowGame VALUES (2, 2, 0);
 
 INSERT INTO FollowTournament VALUES (4, 1, 0);
+
+INSERT INTO TournamentTag VALUES (1, 'Shangai', 0);
+INSERT INTO TournamentTag VALUES (1, 'China', 0);
+INSERT INTO TournamentTag VALUES (1, 'icefrog', 0);
+INSERT INTO TournamentTag VALUES (1, 'Tupac', 1);
+
+INSERT INTO TeamTag VALUES (1, 'force', 0);
+INSERT INTO TeamTag VALUES (1, 'bleue', 0);
+INSERT INTO TeamTag VALUES (1, 'jaune', 0);
+INSERT INTO TeamTag VALUES (1, 'rouge', 0);
+INSERT INTO TeamTag VALUES (1, 'multicolore', 1);
+
+INSERT INTO TournamentLog VALUES (1, 'Création', 1530975600, 0);
