@@ -33,12 +33,12 @@ INSERT INTO Reason VALUES ('Cheating', 'Déroger aux règles du jeu ou du tourno
 INSERT INTO Reason VALUES ('Betting', 'Parier sur un tournoi auquel l''utilisateur prend part', 1);
 INSERT INTO Reason VALUES ('Swearing', 'Employer un langage un peu trop fleuri', 0);
 
-INSERT INTO Geek VALUES ('Catwaman', 'meaow666', 'Jeanne', 'Chaudanson', 'catsrule@bastet.com', '20101995', 0);
-INSERT INTO Geek VALUES ('Blyatman', 'p1zd1et', 'Igor', 'Dosgor', 'moskaumoskau@vodka.com', '26111995', 0);
-INSERT INTO Geek VALUES ('Admin', 'admin', 'Admin', 'Admin', 'admin@admin.com', '05051905', 0);
-INSERT INTO Geek VALUES ('ElModerator', 'iloveunicorns', 'Jean-Marie', 'Michel', 'pfudonr@gogole.com', '01021993', 0);
-INSERT INTO Geek VALUES ('Deleted', 'deleted', 'Deleted', 'Deleted', 'deleted@deleted.com', '20022002', 1);
-INSERT INTO Geek VALUES ('Dendi', 'squirrel321', 'Danil', 'Ishutin', 'danil@ishutin.com', '30121992', 0);
+INSERT INTO Geek VALUES ('Catwaman', 'Jeanne', 'Chaudanson', 'meaow666', 'catsrule@bastet.com', '20101995', 0);
+INSERT INTO Geek VALUES ('Blyatman', 'Igor', 'Dosgor', 'p1zd1et', 'moskaumoskau@vodka.com', '26111995', 0);
+INSERT INTO Geek VALUES ('Admin', 'Admin', 'Admin', 'admin', 'admin@admin.com', '05051905', 0);
+INSERT INTO Geek VALUES ('ElModerator', 'Jean-Marie', 'Michel', 'iloveunicorns', 'pfudonr@gogole.com', '01021993', 0);
+INSERT INTO Geek VALUES ('Deleted', 'Deleted', 'Deleted', 'deleted', 'deleted@deleted.com', '20022002', 1);
+INSERT INTO Geek VALUES ('Dendi', 'Danil', 'Ishutin', 'squirrel321', 'danil@ishutin.com', '30121992', 0);
 
 INSERT INTO RolesGeek VALUES (3, 3, 0);
 INSERT INTO RolesGeek VALUES (4, 4, 0);
