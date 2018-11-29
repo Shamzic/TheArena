@@ -160,8 +160,11 @@
     <Compile Include="Models\Stats.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamGeek.cs" />
+    <Compile Include="Models\TeamTag.cs" />
     <Compile Include="Models\TheArenaContext.cs" />
     <Compile Include="Models\Tournament.cs" />
+    <Compile Include="Models\TournamentLog.cs" />
+    <Compile Include="Models\TournamentTag.cs" />
     <Compile Include="Models\Versus.cs" />
     <Compile Include="Models\Visitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

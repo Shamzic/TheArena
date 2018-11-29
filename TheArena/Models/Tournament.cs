@@ -14,6 +14,8 @@ namespace TheArena.Models
         {
             FollowTournament = new HashSet<FollowTournament>();
             Participation = new HashSet<Participation>();
+            TournamentLog = new HashSet<TournamentLog>();
+            TournamentTag = new HashSet<TournamentTag>();
             Versus = new HashSet<Versus>();
         }
 
@@ -59,6 +61,12 @@ namespace TheArena.Models
         public virtual Period Period { get; set; }
 
         public virtual Period Period1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TournamentLog> TournamentLog { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TournamentTag> TournamentTag { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Versus> Versus { get; set; }

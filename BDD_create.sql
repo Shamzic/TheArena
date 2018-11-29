@@ -36,7 +36,7 @@ CREATE TABLE Score (ScoreId INT NOT NULL IDENTITY PRIMARY KEY, Result INT NOT NU
 CREATE TABLE GameType (GameTypeId INT NOT NULL IDENTITY PRIMARY KEY, Initials varchar(255), Name varchar(255), Description varchar(255), Deleted BIT NOT NULL);
 CREATE TABLE ScoreType (ScoreTypeId INT NOT NULL IDENTITY PRIMARY KEY, Initials varchar(255), Name varchar(255), Deleted BIT NOT NULL);
 CREATE TABLE Visitor (VisitorId INT NOT NULL IDENTITY PRIMARY KEY, Ip varchar(255) NOT NULL, Deleted BIT NOT NULL);
-CREATE TABLE Geek (GeekId INT NOT NULL IDENTITY PRIMARY KEY, Username varchar(255) NOT NULL, Name varchar(255), Surname varchar(255), Password varchar(255), Mail varchar(255), Birthdate INT, Deleted BIT NOT NULL);
+CREATE TABLE Geek (GeekId INT NOT NULL IDENTITY PRIMARY KEY, Username varchar(255) NOT NULL, Name varchar(255), Surname varchar(255), Password varchar(255), Mail varchar(255), Birthdate varchar(10), Deleted BIT NOT NULL);
 CREATE TABLE Result (ResultId INT NOT NULL IDENTITY PRIMARY KEY, Loser INT NOT NULL, Winner INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE Roles (RoleId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Deleted BIT NOT NULL);
 CREATE TABLE Settings (SettingsId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Setting INT NOT NULL, Value varchar(255), Deleted BIT NOT NULL);
