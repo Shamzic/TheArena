@@ -1,96 +1,36 @@
 ﻿@model IEnumerable<TheArena.Models.Tournament>
 
 @{
-    ViewBag.Title = "Index";
+ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
- @if (User.Identity.IsAuthenticated)
- { 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Game1.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Geek.Username)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Period.PeriodId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Period1.PeriodId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Initials)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rules)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Slots)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PlayerNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tags)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Deleted)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Game1.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Geek.Username)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Period.PeriodId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Period1.PeriodId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Initials)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rules)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Slots)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PlayerNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tags)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Deleted)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.TournamentId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.TournamentId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.TournamentId })
-                </td>
-            </tr>
-        }
-
-    </table>
+<h3>
+    Tournois proposés sur notre site : 
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="Tournament/Create">
+            <button type="button" class="btn btn-outline-success">Ajoutez le votre</button>
+        </a>
+    }
+</h3>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card col-lg-3 m-1" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.Game1.Name)</h6>
+                <p class="card-text">Règles : @Html.DisplayFor(modelItem => item.Rules)</p>
+                @Html.ActionLink("Detail", "Details", new { id = item.TournamentId })
+                @if (item.Geek.Username == User.Identity.Name)
+                {
+                    @Html.ActionLink("Paramétrer", "Edit", new { id = item.TournamentId })
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -226,13 +226,13 @@ namespace TheArena.Models
 
             modelBuilder.Entity<Period>()
                 .HasMany(e => e.Tournament)
-                .WithRequired(e => e.Period)
+                .WithRequired(e => e.PeriodRegistration)
                 .HasForeignKey(e => e.RegisteringPeriod)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Period>()
                 .HasMany(e => e.Tournament1)
-                .WithRequired(e => e.Period1)
+                .WithRequired(e => e.PeriodPlay)
                 .HasForeignKey(e => e.PlayingPeriod)
                 .WillCascadeOnDelete(false);
 

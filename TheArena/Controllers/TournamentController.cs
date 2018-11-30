@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web.Security;
 using System.Web;
 using System.Web.Mvc;
 using TheArena.Models;
@@ -16,9 +15,10 @@ namespace TheArena.Controllers
         private TheArenaContext db = new TheArenaContext();
 
         // GET: Tournament
+        // GET: Tournament
         public ActionResult Index()
         {
-            var tournament = db.Tournament.Where(t => t.Deleted == false).Include(t => t.Game1).Include(t => t.Geek).Include(t => t.Period).Include(t => t.Period1);
+            var tournament = db.Tournament.Where(t => t.Deleted == false).Include(t => t.Game1).Include(t => t.Geek).Include(t => t.PeriodRegistration).Include(t => t.PeriodPlay);
             return View(tournament.ToList());
         }
 
@@ -40,11 +40,18 @@ namespace TheArena.Controllers
         // GET: Tournament/Create
         public ActionResult Create()
         {
-            ViewBag.Game = new SelectList(db.Game, "GameId", "Name");
-            ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username");
-            ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId");
-            ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId");
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name");
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username");
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId");
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId");
+                return View();
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         // POST: Tournament/Create
@@ -83,11 +90,19 @@ namespace TheArena.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
-            ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
-            ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
-            ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
-            return View(tournament);
+            Geek organiser = db.Geek.Where(g => g.Username == User.Identity.Name && !g.Deleted).FirstOrDefault();
+            if (organiser.GeekId == tournament.Organiser)
+            {
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         // POST: Tournament/Edit/5
