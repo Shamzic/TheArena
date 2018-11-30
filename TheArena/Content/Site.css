@@ -83,3 +83,7 @@ a {
 a:hover {
     color: #737373;
 }
+
+.nav-pills .nav-link.active {
+    background-color: #999999;
+}
