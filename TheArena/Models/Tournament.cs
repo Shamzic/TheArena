@@ -58,9 +58,9 @@ namespace TheArena.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Participation> Participation { get; set; }
 
-        public virtual Period Period { get; set; }
+        public virtual Period PeriodRegistration { get; set; }
 
-        public virtual Period Period1 { get; set; }
+        public virtual Period PeriodPlay { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TournamentLog> TournamentLog { get; set; }

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TheArena.Models.Tournament>
+
+@{
+ViewBag.Title = "Index";
+}
+
+<h3>
+    Tournois proposés sur notre site : 
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="Tournament/Create">
+            <button type="button" class="btn btn-outline-success">Ajoutez le votre</button>
+        </a>
+    }
+</h3>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card col-lg-3 m-1" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.Game1.Name)</h6>
+                <p class="card-text">Règles : @Html.DisplayFor(modelItem => item.Rules)</p>
+                @Html.ActionLink("Detail", "Details", new { id = item.TournamentId })
+                @if (item.Geek.Username == User.Identity.Name)
+                {
+                    @Html.ActionLink("Paramétrer", "Edit", new { id = item.TournamentId })
+                }
+            </div>
+        </div>
+    }
+</div>

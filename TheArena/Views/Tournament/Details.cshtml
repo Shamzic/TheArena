@@ -1,0 +1,121 @@
+﻿@model TheArena.Models.Tournament
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="">
+            <h1 class="text-center">
+                @Html.DisplayFor(model => model.Name)
+                @if (Model.Geek.Username == User.Identity.Name)
+                {
+                    <a href="../Edit/@Html.DisplayFor(model => model.TournamentId)">@Html.Raw("<button type=\"button\" class=\"btn btn - outline - success\"><span class=\"fas fa - cog\"></span></button>")</a>
+                }
+                else if(User.Identity.IsAuthenticated)
+                {
+                    //todo inscription équipe
+                }
+                <!--
+                <c:when test="${not empty pageContext.request.userPrincipal.name}">
+
+                    <c:set var="canAdd" value="true" />
+                    <c:set var="haveTeams" value="false" />
+                    <c:set var="canLeave" value="" />
+
+                    <c:forEach var="teamGeek" items="${pageContext.request.userPrincipal.principal.databaseObject.teamGeeks}">
+                        <c:set var="haveTeams" value="true" />
+                        <c:forEach var="participation" items="${tournoi.participations}">
+                            <c:if test="${teamGeek.team.teamId == participation.team.teamId && !teamGeek.deleted && !participation.deleted}">
+                                <c:set var="canAdd" value="false" />
+                                <c:if test="${teamGeek.team.geek.username eq pageContext.request.userPrincipal.principal.databaseObject.username}">
+                                    <c:set var="canLeave" value="${teamGeek.team.teamId}" />
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                    </c:forEach>
+
+                    <c:if test="${playingPeriod.beginDate < dateValue && playingPeriod.endDate > dateValue}">
+                        <c:set var="canAdd" value="false" />
+                    </c:if>
+                    <c:if test="${canAdd && haveTeams}">
+                        <form:form method="POST" action="${tournoi.tournamentId}/participate" class="form-inline">
+                            <select class="form-control" name="teamId">
+                                <c:forEach items="${pageContext.request.userPrincipal.principal.databaseObject.teams}" var="team">
+                                    <option value="${team.teamId}">${team.name}</option>
+                                </c:forEach>
+                            </select>
+                            <input type="submit" class="btn btn-outline-success" value="Participer" />
+                        </form:form>
+                    </c:if>
+                    <c:if test="${!empty canLeave}">
+                        <form:form method="POST" action="${tournoi.tournamentId}/leave" class="form-inline">
+                            <input type="hidden" name="teamId" value="${canLeave}" />
+                            <input type="submit" class="btn btn-outline-danger" value="Abandonner" />
+                        </form:form>
+
+                    </c:if>
+
+
+                </c:when>-->
+            </h1>
+            <h6 class="text-center">Organisé par <b>@Html.DisplayFor(model => model.Geek.Username)</b></h6>
+            <!--<h6 class="text-center"><c:if test="${playingPeriod.beginDate < dateValue && playingPeriod.endDate > dateValue}"><span class="badge badge-success">Tournoi en cours</span></c:if> </h6>
+            <h6 class="text-center"><c:if test="${playingPeriod.endDate < dateValue}"><span class="badge badge-danger">Tournoi terminé</span></c:if> </h6>-->
+            <!-- to add, gestion des timestamp-->
+            <div class="dropdown-divider"></div>
+        </div>
+        <div class="row justify-content-between">
+            <div class="col-5 text-center">
+                <p class="m-0"><small>Débute le</small></p>
+                <p><span class="fa fa-clock"></span> <fmt:formatDate value="${playingPeriod.beginDate}" pattern="E dd MMMM yyyy" /></p>
+            </div>
+            <div class="col-5 text-center">
+                <p class="m-0"><small>Termine le</small></p>
+                <p><span class="fa fa-clock"></span> <fmt:formatDate value="${playingPeriod.endDate}" pattern="E dd MMMM yyyy" /></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="pt-lg-5 col-lg-3 text-center">
+        <h3> Jeu sélectionné :</h3>
+        <p>@Html.DisplayFor(model => model.Game1.Name)</p>
+        <h4> Type de jeu :</h4>
+        <p>@Html.DisplayFor(model => model.Game1.GameType)</p>
+        <h4> Limite d'âge :</h4>
+        <p>@Html.DisplayFor(model => model.Game1.AgeLimit)</p>
+    </div>
+    <div class="pl-3 col-lg-9">
+        <div>
+            <h5>Description</h5>
+            @Html.DisplayFor(model => model.Rules)
+            <h5 class="card-title">Paramètre des équipes</h5>
+            <p class="card-text">Taille des équipes : <b>@Html.DisplayFor(model => model.PlayerNumber)</b></p>
+            <p class="card-text">Nombre d'équipes : <b>@Html.DisplayFor(model => model.Slots)</b></p>
+            <p class="card-text">
+                Période d'inscription : <b>@Html.DisplayFor(model => model.PeriodRegistration.Start.Value)</b> au
+                                        <b>@Html.DisplayFor(model => model.PeriodRegistration.Ending.Value)</b>
+                <h6 class="text-center">
+                <!--Todo gerer les dates-->    <c:if test="${registrationPeriod.beginDate < dateValue && registrationPeriod.endDate > dateValue}"><span class="badge badge-success">Inscription ouvertes</span></c:if>
+                </h6>
+            </p>
+
+            <h3>Equipes participantes : </h3>
+            @foreach (var item in Model.Participation)
+            {
+                if (!item.Deleted)
+                {
+                    <div class="card-body">
+                        @Html.DisplayFor(m => item.Team1.Name)
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>
