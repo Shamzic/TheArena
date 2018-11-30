@@ -71,3 +71,15 @@ body {
 #liste ul {
     list-style: none;
 }
+
+/*********/
+/* Links */
+/*********/
+
+a {
+    color: #999999;
+}
+
+a:hover {
+    color: #737373;
+}
