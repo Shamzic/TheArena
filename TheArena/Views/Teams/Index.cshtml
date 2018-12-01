@@ -1,30 +1,27 @@
 ﻿@model IEnumerable<TheArena.Models.Team>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Équipes";
 }
 
-<h2>Index</h2>
+<h2>Équipes enregistrées</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2  class="btn btn-outline-success my-2 text-dark">
+    @Html.ActionLink("Créer une nouvelle équipe", "Create")
+</h2>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Geek.Username)
+           <h5>Capitaine</h5>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Initials)
+            <h5>Initiales</h5>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            <h5>Nom d'équipe</h5>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tags)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Deleted)
+            <h5>Tags</h5>
         </th>
         <th></th>
     </tr>
@@ -44,13 +41,16 @@
             @Html.DisplayFor(modelItem => item.Tags)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Deleted)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TeamId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TeamId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TeamId })
-        </td>
+            <div class="btn btn-outline-primary">
+                @Html.ActionLink("Éditer", "Edit", new { id = item.TeamId })
+            </div>
+            <div class="btn btn-outline-primary">
+                @Html.ActionLink("Détails", "Details", new { id = item.TeamId })
+            </div>
+            <div class="btn btn-outline-danger">
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.TeamId })
+            </div>
+</td>
     </tr>
 }
 

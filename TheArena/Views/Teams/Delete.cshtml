@@ -4,15 +4,12 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Êtes vous sûr de vouloir supprimer l'équipe suivante?</h3>
 <div>
-    <h4>Team</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Geek.Username)
+            Capitaine d'équipe
         </dt>
 
         <dd>
@@ -20,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Initials)
+            Initiales
         </dt>
 
         <dd>
@@ -28,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+           Nom d'équipe
         </dt>
 
         <dd>
@@ -42,23 +39,18 @@
         <dd>
             @Html.DisplayFor(model => model.Tags)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Deleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Deleted)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
-</div>
+       <div class="form-actions no-color">
+           <div class="form-group">
+               <input type="submit" value="Supprimer" class="btn btn-outline-danger" />
+               </div>
+               <div class="btn btn-outline-dark col-md-3">
+                   @Html.ActionLink("Retourner à la liste des équipes", "Index")
+               </div>
+           </div>
+           }
+       </div>

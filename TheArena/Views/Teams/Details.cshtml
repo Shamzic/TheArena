@@ -1,58 +1,60 @@
 ﻿@model TheArena.Models.Team
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Détails";
 }
 
-<h2>Details</h2>
+<h2>Détails d'équipe</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Nom du capitaine
+            </dt>
 
-<div>
-    <h4>Team</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Geek.Username)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Geek.Username)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Geek.Username)
-        </dd>
+            <dt>
+                Initiales
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Initials)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Initials)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Initials)
-        </dd>
+            <dt>
+                Nom de l'équipe
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Tags)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Tags)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Tags)
+            </dd>
+        </dl>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Tags)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Deleted)
-        </dt>
+    <div class="btn btn-outline-primary col-md-3">
 
-        <dd>
-            @Html.DisplayFor(model => model.Deleted)
-        </dd>
+        @Html.ActionLink("Éditer", "Edit", new { id = Model.TeamId })
+    </div>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+    <div class="btn btn-outline-dark col-md-3">
+
+        @Html.ActionLink("Retourner à la liste des équipes ", "Index")
+    </div>
+
+}
