@@ -26,7 +26,7 @@ CREATE TABLE Ranking (RankingId INT NOT NULL IDENTITY PRIMARY KEY, Standing INT,
 CREATE TABLE Tournament (TournamentId INT NOT NULL IDENTITY PRIMARY KEY, Initials varchar(255) NOT NULL, Name varchar(255), Rules varchar(255), Slots INT, PlayerNumber INT, Tags varchar(255), RegisteringPeriod INT NOT NULL, PlayingPeriod INT NOT NULL, Game INT NOT NULL, Deleted BIT NOT NULL, Organiser INT NOT NULL);
 CREATE TABLE Game (GameId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), AgeLimit INT, GameType INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE Team (TeamId INT NOT NULL IDENTITY PRIMARY KEY, Initials varchar(255), Name varchar(255), Tags varchar(255), Captain INT NOT NULL, Deleted BIT NOT NULL);
-CREATE TABLE Period (PeriodId INT NOT NULL IDENTITY PRIMARY KEY, Start INT, Ending INT, Deleted BIT NOT NULL);
+CREATE TABLE Period (PeriodId INT NOT NULL IDENTITY PRIMARY KEY, Start smalldatetime, Ending smalldatetime, Deleted BIT NOT NULL);
 CREATE TABLE Participation (ParticipationId INT NOT NULL IDENTITY PRIMARY KEY, Place INT, Qualified BIT NOT NULL, Team INT NOT NULL, Tournament INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE Versus (VersusId INT NOT NULL IDENTITY PRIMARY KEY, Team1 INT, Team2 INT, VersusPeriod INT NOT NULL, Result INT NOT NULL, Tournament INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE Reason (ReasonId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Description varchar(255), Deleted BIT NOT NULL);
