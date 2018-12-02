@@ -133,6 +133,8 @@
     <Compile Include="Controllers\GeeksController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TeamGeeksController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,6 +260,17 @@
     <Content Include="Views\Tournament\Details.cshtml" />
     <Content Include="Views\Tournament\Edit.cshtml" />
     <Content Include="Views\Tournament\Index.cshtml" />
+    <Content Include="Views\Teams\Create.cshtml" />
+    <Content Include="Views\Teams\Delete.cshtml" />
+    <Content Include="Views\Teams\Details.cshtml" />
+    <Content Include="Views\Teams\Edit.cshtml" />
+    <Content Include="Views\Teams\Index.cshtml" />
+    <Content Include="Views\Teams\Inscription.cshtml" />
+    <Content Include="Views\TeamGeeks\Create.cshtml" />
+    <Content Include="Views\TeamGeeks\Delete.cshtml" />
+    <Content Include="Views\TeamGeeks\Details.cshtml" />
+    <Content Include="Views\TeamGeeks\Edit.cshtml" />
+    <Content Include="Views\TeamGeeks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

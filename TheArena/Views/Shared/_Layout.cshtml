@@ -28,7 +28,10 @@
                     <ul class="nav col justify-content-end">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li id="username" class="nav-item">Bienvenue @User.Identity.Name</li>
+                            <li  class="nav-link">Bienvenue <b><a href="@Url.Action("Index", "Geeks")">@User.Identity.Name </a> </b></li>
+                            <li>
+                                <a class="nav-link" href="@Url.Action("Edit", "Geeks", new {id = User.Identity.Name })"><span class="fas fa-cog"></span></a>
+                            </li>
                             <li>
                                 <a class="btn btn-outline-success my-2 my-sm-0" href="@Url.Action("Logout","Login")">Se déconnecter</a>
                             </li>
@@ -38,8 +41,8 @@
                             <li>
                                 <a class="btn btn-outline-success my-2 my-sm-0"  href="@Url.Action("Index","Login")">Se connecter</a>
                             </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("S'enregistrer", "Register", "Login", new { @class = "nav-link" })
+                            <li>
+                                <a class="nav-link" href="@Url.Action("Register","Login")">S'enregistrer</a>
                             </li>
                         }
                     </ul>
@@ -58,20 +61,11 @@
                         <a href="@Url.Action("Index", "Tournament")" class="nav-link"><span class="fas fa-calendar"></span> Tournois</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Team")"><span class="fas fa-users"></span>Equipes</a>
+                        <a class="nav-link" href="@Url.Action("Index", "Teams")"><span class="fas fa-users"></span>Equipes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><span class="fas fa-gamepad"></span> Jeux</a>
                     </li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Geeks")"><span class="fas fa-user-circle"></span> Profil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Edit", "Geeks", new {id = User.Identity.Name })"><span class="fas fa-cog"></span> Paramètres</a>
-                        </li>
-                    }
                 </ul>
             </div>
         </div>
@@ -80,7 +74,7 @@
     <div class="container main-container pt-3 pb-3">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="navbar navbar-fixed-bottom">
             <p>&copy; @DateTime.Now.Year - The Arena</p>
         </footer>
     </div>

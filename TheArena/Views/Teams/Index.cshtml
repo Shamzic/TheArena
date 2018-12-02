@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TheArena.Models.Team>
+
+@{
+    ViewBag.Title = "Équipes";
+}
+
+<h2>Équipes enregistrées</h2>
+
+<h2  class="btn btn-outline-success my-2 text-dark">
+    @Html.ActionLink("Créer une nouvelle équipe", "Create")
+</h2>
+<table class="table">
+    <tr>
+        <th>
+           <h5>Capitaine</h5>
+        </th>
+        <th>
+            <h5>Initiales</h5>
+        </th>
+        <th>
+            <h5>Nom d'équipe</h5>
+        </th>
+        <th>
+            <h5>Tags</h5>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Geek.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Initials)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tags)
+        </td>
+        <td>
+            <div class="btn btn-outline-primary">
+                @Html.ActionLink("Éditer", "Edit", new { id = item.TeamId })
+            </div>
+            <div class="btn btn-outline-primary">
+                @Html.ActionLink("Détails", "Details", new { id = item.TeamId })
+            </div>
+            <div class="btn btn-outline-danger">
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.TeamId })
+            </div>
+</td>
+    </tr>
+}
+
+</table>
