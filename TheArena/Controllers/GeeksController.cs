@@ -55,6 +55,8 @@ namespace TheArena.Controllers
             {
                 db.Geek.Add(geek);
                 db.SaveChanges();
+                
+
                 return RedirectToAction("Index");
             }
 

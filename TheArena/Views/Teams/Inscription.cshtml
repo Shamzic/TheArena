@@ -1,0 +1,57 @@
+﻿@model TheArena.Models.Team
+
+@{
+    ViewBag.Title = "Inscription";
+}
+
+<h3>Êtes vous sûr de vouloir vous inscrire dans l'équipe suivante?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Capitaine d'équipe
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Geek.Username)
+        </dd>
+
+        <dt>
+            Initiales
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Initials)
+        </dd>
+
+        <dt>
+            Nom d'équipe
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tags)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <div class="form-group">
+                <input type="submit" value="S'inscrire" class="btn btn-outline-success"/>
+            </div>
+            <div class="btn btn-outline-dark col-md-3">
+                @Html.ActionLink("Retourner à la liste des équipes", "Index")
+            </div>
+        </div>
+    }
+</div>
