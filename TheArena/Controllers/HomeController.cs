@@ -16,9 +16,11 @@ namespace TheArena.Controllers
         public ActionResult Index()
         {
             Tournament[] lastUpdated = db.TournamentLog.Where(r => r.Deleted != true).GroupBy(x => x.Tournament).Select(x => x.FirstOrDefault()).Take(5).Select(t => t.Tournament1).ToArray();
-
+            
             return View(lastUpdated);
         }
+
+        
 
         public ActionResult About()
         {
