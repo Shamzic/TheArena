@@ -129,10 +129,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\PeriodeAttributes.cs" />
     <Compile Include="Controllers\GeeksController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\TeamGeeksController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
     <Compile Include="Global.asax.cs">
@@ -171,6 +173,7 @@
     <Compile Include="Models\Versus.cs" />
     <Compile Include="Models\Visitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TournamentDetailViewModel.cs" />
     <Compile Include="ViewModels\MultipleSearch.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +267,12 @@
     <Content Include="Views\Teams\Details.cshtml" />
     <Content Include="Views\Teams\Edit.cshtml" />
     <Content Include="Views\Teams\Index.cshtml" />
+    <Content Include="Views\Teams\Inscription.cshtml" />
+    <Content Include="Views\TeamGeeks\Create.cshtml" />
+    <Content Include="Views\TeamGeeks\Delete.cshtml" />
+    <Content Include="Views\TeamGeeks\Details.cshtml" />
+    <Content Include="Views\TeamGeeks\Edit.cshtml" />
+    <Content Include="Views\TeamGeeks\Index.cshtml" />
     <Content Include="Views\Search\Create.cshtml" />
     <Content Include="Views\Search\Delete.cshtml" />
     <Content Include="Views\Search\Details.cshtml" />
@@ -272,7 +281,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Team\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

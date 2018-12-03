@@ -5,6 +5,8 @@ namespace TheArena.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
+    using TheArena.Attributes;
 
     [Table("Tournament")]
     public partial class Tournament
@@ -23,8 +25,10 @@ namespace TheArena.Models
 
         [Required]
         [StringLength(255)]
+        [Index(IsUnique = true)]
         public string Initials { get; set; }
 
+        [Required]
         [StringLength(255)]
         public string Name { get; set; }
 
@@ -70,5 +74,6 @@ namespace TheArena.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Versus> Versus { get; set; }
+
     }
 }

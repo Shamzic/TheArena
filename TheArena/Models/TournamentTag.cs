@@ -17,7 +17,7 @@ namespace TheArena.Models
         [StringLength(255)]
         public string Tag { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
 
         public virtual Tournament Tournament1 { get; set; }
     }

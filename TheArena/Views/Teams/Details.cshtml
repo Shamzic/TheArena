@@ -1,8 +1,11 @@
 ﻿@model TheArena.Models.Team
 
 @{
+    /**/
+
     ViewBag.Title = "Détails";
 }
+
 
 <h2>Détails d'équipe</h2>
 @using (Html.BeginForm())
@@ -50,11 +53,17 @@
 
         @Html.ActionLink("Éditer", "Edit", new { id = Model.TeamId })
     </div>
+}
+<div class="form-actions no-color">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="btn btn-outline-success col-md-3">
+            @Html.ActionLink("S'inscrire dans cette équipe", "Create", "TeamGeeks", new { }, null)
+        </div>
+    }
+    </div>
 
 
     <div class="btn btn-outline-dark col-md-3">
-
-        @Html.ActionLink("Retourner à la liste des équipes ", "Index")
+        @Html.ActionLink("Retourner à la liste des équipes", "Index")
     </div>
-
-}
