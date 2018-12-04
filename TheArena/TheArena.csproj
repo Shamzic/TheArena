@@ -162,6 +162,7 @@
     <Compile Include="Models\ScoreType.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\SettingValues.cs" />
     <Compile Include="Models\Stats.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamGeek.cs" />

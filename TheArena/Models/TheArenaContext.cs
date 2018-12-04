@@ -34,6 +34,7 @@ namespace TheArena.Models
         public virtual DbSet<ScoreType> ScoreType { get; set; }
         public virtual DbSet<Setting> Setting { get; set; }
         public virtual DbSet<Settings> Settings { get; set; }
+        public virtual DbSet<SettingValues> SettingValues { get; set; }
         public virtual DbSet<Stats> Stats { get; set; }
         public virtual DbSet<Team> Team { get; set; }
         public virtual DbSet<TeamGeek> TeamGeek { get; set; }
@@ -290,18 +291,20 @@ namespace TheArena.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Setting>()
-                .Property(e => e.Preselected)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Setting>()
-                .HasMany(e => e.Settings)
+                .HasMany(e => e.SettingValues)
                 .WithRequired(e => e.Setting1)
                 .HasForeignKey(e => e.Setting)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Settings>()
+            modelBuilder.Entity<SettingValues>()
                 .Property(e => e.Value)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<SettingValues>()
+                .HasMany(e => e.Settings)
+                .WithRequired(e => e.SettingValues)
+                .HasForeignKey(e => e.SettingValue)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Team>()
                 .Property(e => e.Initials)

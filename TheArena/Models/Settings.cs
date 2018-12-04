@@ -12,15 +12,12 @@ namespace TheArena.Models
 
         public int Geek { get; set; }
 
-        public int Setting { get; set; }
-
-        [StringLength(255)]
-        public string Value { get; set; }
+        public int SettingValue { get; set; }
 
         public bool Deleted { get; set; }
 
         public virtual Geek Geek1 { get; set; }
 
-        public virtual Setting Setting1 { get; set; }
+        public virtual SettingValues SettingValues { get; set; }
     }
 }
