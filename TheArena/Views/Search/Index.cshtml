@@ -1,0 +1,89 @@
+﻿@model TheArena.ViewModels.MultipleSearch
+@{ ViewBag.Title = "MultipleSearch";}
+
+
+
+
+<h2>Geeks</h2>
+
+<table class="table">
+
+    @foreach (var item in Model.geekss)
+    {
+        <tr>
+            <td>
+                @item.Username
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Surname
+            </td>
+            <td>
+                @item.Password
+            </td>
+            <td>
+                @item.Mail
+            </td>
+            <td>
+                @item.Birthdate
+            </td>
+
+
+        </tr>
+    }
+
+</table>
+
+
+<br />
+<br />
+<h2>Games</h2>
+
+<table class="table">
+
+    @foreach (var item in Model.gamess)
+    {
+    <tr>
+        <td>
+            @item.Name
+        </td>
+        <td>
+            @item.AgeLimit
+        </td>
+        <td>
+            @item.Division
+        </td>
+
+
+    </tr>
+    }
+
+</table>
+
+<br />
+<br />
+<h2>Tournaments</h2>
+<table class="table">
+
+    @foreach (var item in Model.tournamentss)
+    {
+        <tr>
+            
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Initials
+            </td>
+            <td>
+                @item.Rules
+            </td>
+            <td>
+                @item.PlayerNumber
+            </td>
+           </tr>
+    }
+
+</table>
