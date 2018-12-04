@@ -72,6 +72,60 @@ namespace TheArena.Controllers
         {
             tournament.Deleted = false;
             Geek organiser = db.Geek.Where(g => g.Username == User.Identity.Name && !g.Deleted).FirstOrDefault();
+            if(playingPeriodEnd<= playingPeriodStart)
+            {
+                ViewBag.Message = "La date de fin de jeu doit être ultérieur à la date de début";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            if (playingPeriodStart < registeringPeriodEnd)
+            {
+                ViewBag.Message = "Le tournoi ne peut commencer si les inscriptions ne sont pas terminées";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            if(registeringPeriodEnd <= registeringPeriodStart)
+            {
+                ViewBag.Message = "La date de fin d'inscription doit être ultérieur à la date de début";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            if (registeringPeriodStart < DateTime.UtcNow)
+            {
+                ViewBag.Message = "La date de début des inscription doit être ultérieur à la date courante";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            if(db.Tournament.Where(t => t.Initials == tournament.Initials) != null)
+            {
+                ViewBag.Message = "Les initiales de tournoi est déja pris";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            if (db.Tournament.Where(t => t.Name == tournament.Name) != null)
+            {
+                ViewBag.Message = "Le nom de tournoi est déja pris";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
             Period playingPeriod = new Period(playingPeriodStart, playingPeriodEnd);
             Period registeringPeriod = new Period(registeringPeriodStart, registeringPeriodEnd);
             tournament.Organiser = organiser.GeekId;
@@ -142,6 +196,42 @@ namespace TheArena.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "TournamentId,Initials,Name,Rules,Slots,PlayerNumber,Tags,RegisteringPeriod,PlayingPeriod,Game,Deleted,Organiser")] Tournament tournament, DateTime PeriodRegistrationStart, DateTime PeriodRegistrationEnd, DateTime PeriodPlayStart, DateTime PeriodPlayEnd)
         {
+            if (PeriodPlayStart >= PeriodPlayEnd)
+            {
+                ViewBag.Message = "La date de fin de jeu doit être ultérieur à la date de début";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            if (PeriodPlayStart < PeriodRegistrationEnd)
+            {
+                ViewBag.Message = "Le tournoi ne peut commencer si les inscriptions ne sont pas terminées";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            if (PeriodRegistrationStart >= PeriodRegistrationEnd)
+            {
+                ViewBag.Message = "La date de fin d'inscription doit être ultérieur à la date de début";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            if (PeriodRegistrationStart < DateTime.UtcNow && PeriodRegistrationStart != db.Tournament.Find(tournament.TournamentId).PeriodRegistration.Start)
+            {
+                ViewBag.Message = "La date de début des inscription doit être ultérieur à la date courante";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
             if (ModelState.IsValid)
             {
                 tournament.PeriodRegistration = db.Period.Find(tournament.RegisteringPeriod);
