@@ -19,7 +19,7 @@ namespace TheArena.Controllers
         
         // GET: SearchGeek
         public ActionResult Index(String search)
-        {
+        {//
             var mymodel = new ViewModels.MultipleSearch();
             mymodel.gamess = db.Game.Where(x => x.Name.Contains(search) || search == null).ToList();
             mymodel.geekss = db.Geek.Where(x => x.Name.Contains(search) || search == null).ToList();
