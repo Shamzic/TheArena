@@ -32,6 +32,7 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.TournamentId)
             @Html.HiddenFor(model => model.Initials)
             @Html.HiddenFor(model => model.Organiser)
             @Html.HiddenFor(model => model.Deleted)
@@ -68,23 +69,26 @@
             <div class="form-inline">
                 <div class="form-group">
                     <label for="registeringPeriodStart">Débute le</label>
-                    <input type="date" class="form-control m-1" name="registeringPeriodStart" id="registeringPeriodStart" value="" placeholder="DateDebut">
+                    @Html.EditorFor(model => model.PeriodRegistration.Start, new { htmlAttributes = new {Name= "PeriodRegistrationStart", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodRegistration.Start, "", new { @class = "text-danger" , datavalmsgfor= "PeriodRegistrationStart" })
                 </div>
                 <div class="form-group">
                     <label for="registeringPeriodEnd">Termine le</label>
-                    <input type="date" class="form-control m-1" name="registeringPeriodEnd" id="registeringPeriodEnd" value="" placeholder="DateFin">
+                    @Html.EditorFor(model => model.PeriodRegistration.Ending, new { htmlAttributes = new {  Name = "PeriodRegistrationEnd", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodRegistration.Ending, "", new { @class = "text-danger", datavalmsgfor= "PeriodRegistrationEnd" })
                 </div>
             </div>
             <h4><span class="fa fa-clock"></span> Période de jeux</h4>
             <div class="form-inline">
                 <div class="form-group">
                     <label for="playingPeriodStart">Débute le</label>
-                    <input type="date" class="form-control m-1" id="playingPeriodStart" name="playingPeriodStart" value="" placeholder="DateDebut">
-
+                    @Html.EditorFor(model => model.PeriodPlay.Start, new { htmlAttributes = new { Name ="PeriodPlayStart", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodPlay.Start, "", new { @class = "text-danger", datavalmsgfor="PeriodePlayStart" })
                 </div>
                 <div class="form-group">
                     <label for="playingPeriodEnd">Termine le</label>
-                    <input type="date" class="form-control m-1" id="playingPeriodEnd" name="playingPeriodEnd" value="" placeholder="DateFin">
+                    @Html.EditorFor(model => model.PeriodPlay.Ending, new { htmlAttributes = new { Name = "PeriodPlayEnd" ,@class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodPlay.Ending, "", new { @class = "text-danger" , datavalmsgfor = "PeriodePlayEnd" })
                 </div>
             </div>
 
@@ -108,33 +112,35 @@
                 {
                     if (!participation.Deleted && !participation.Team1.Deleted)
                     {
-                        <tr>
-                            @using (Html.BeginForm("Participation", "Tournament", new { Id = Model.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" value="@participation.Team1.TeamId" name="TeamId" id="TeamId" />
-                                <th scope="row">
-                                    @participation.Team1.Name
-                                </th>
-                                <td>
-                                    <input type="number" name="place" class="form-control" value="">
-                                </td>
-                                <td>
-                                    @Html.CheckBox("isNewlyEnrolled", participation.Qualified)
-                                </td>
-                                <td>
-                                    <input type="submit" class="btn btn-outline-success" value="Modifier">
-                                </td>
-                            }
-                            <td>
-                                @using (Html.BeginForm("Abandon", "Tournament", new { Id = Model.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <input type="hidden" name="teamId" value="@participation.Team1.TeamId" />
-                                    <input type="submit" class="btn btn-outline-danger" value="Disqualifier" />
-                                }
-                            </td>
-                        </tr>
+                <tr>
+                    @using (Html.BeginForm("Participation", "Tournament", new { Id = Model.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" value="@participation.Team1.TeamId" name="TeamId" id="TeamId" />
+                        @Html.HiddenFor(model => model.TournamentId)
+                        <th scope="row">
+                            @participation.Team1.Name
+                        </th>
+                        <td>
+                            <input type="number" name="place" class="form-control" value="">
+                        </td>
+                        <td>
+                            @Html.CheckBox("isNewlyEnrolled", participation.Qualified)
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-outline-success" value="Modifier">
+                        </td>
+                    }
+                    <td>
+                        @using (Html.BeginForm("Abandon", "Tournament", new { Id = Model.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="teamId" value="@participation.Team1.TeamId" />
+                            @Html.HiddenFor(model => model.TournamentId)
+                            <input type="submit" class="btn btn-outline-danger" value="Disqualifier" />
+                        }
+                    </td>
+                </tr>
                     }
                 }
             </tbody>
@@ -175,19 +181,21 @@
             if (!tag.Deleted)
             {
                 <p>@tag.Tag</p>
-                using (Html.BeginForm("DeleteTag", "Tournament", new { Id = Model.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
+                using (Html.BeginForm("DeleteTag", "Tournament", FormMethod.Post, new { @class = "form-inline" }))
                 {
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="tagId" id="tagId" value="@tag.TagId" />
+                    @Html.HiddenFor(model => model.TournamentId)
                     <input type="submit" class="btn btn-outline-danger" value="Supprimer" />
                 }
             }
         }
-        @using (Html.BeginForm("AddTag", "Tournament", new { Id = Model.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
+        @using (Html.BeginForm("AddTag", "Tournament", FormMethod.Post, new { @class = "form-inline" }))
         {
             @Html.AntiForgeryToken()
             <div class="input-group">
                 <label for="addTag">Nom du tag à ajouter</label>
+                @Html.HiddenFor(model => model.TournamentId)
                 <input type="text" name="tag" id="tag" class="form-control" />
             </div>
             <input type="submit" class="btn btn-outline-success" value="Ajouter" />
@@ -195,14 +203,11 @@
     </div>
     <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="delete-tab">
         Attention, supprimer le tournoi est une action irréversible, êtes vous sûr de vouloir faire ça ?
-        <a href="delete"><button type="button" class="btn btn-outline-danger">Supprimer</button></a>
+        <a href="../Delete/@Model.TournamentId"><button type="button" class="btn btn-outline-danger">Supprimer</button></a>
     </div>
 </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.TournamentId })
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

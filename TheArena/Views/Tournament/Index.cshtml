@@ -3,9 +3,9 @@
 @{
 ViewBag.Title = "Index";
 }
-
+<h3 class="text-danger text-center"> @ViewBag.Message</h3>
 <h3>
-    Tournois proposés sur notre site : 
+    Tournois proposés sur notre site :
     @if (User.Identity.IsAuthenticated)
     {
         <a href="Tournament/Create">
