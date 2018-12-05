@@ -1,89 +1,100 @@
 ﻿@model TheArena.ViewModels.MultipleSearch
 @{ ViewBag.Title = "MultipleSearch";}
 
+@if (!Model.geekss.Any() && !Model.gamess.Any()  && !Model.tournamentss.Any())
+{
+    <p>Aucun résultat trouvé.</p>
+}
 
-
-
-<h2>Geeks</h2>
-
-<table class="table">
-
-    @foreach (var item in Model.geekss)
-    {
+@if (Model.geekss.Any())
+{
+    <h2>Geeks</h2>
+    <table class="table">
         <tr>
-            <td>
-                @item.Username
-            </td>
-            <td>
-                @item.Name
-            </td>
-            <td>
-                @item.Surname
-            </td>
-            <td>
-                @item.Password
-            </td>
-            <td>
-                @item.Mail
-            </td>
-            <td>
-                @item.Birthdate
-            </td>
-
-
+            <th>Username</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Date de naissance</th>
         </tr>
-    }
+        @foreach (var item in Model.geekss)
+        {
+            <tr>
+                <td>
+                    @item.Username
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Surname
+                </td>
+                <td>
+                    @item.Mail
+                </td>
+                <td>
+                    @item.Birthdate
+                </td>
 
-</table>
+            </tr>
+        }
+    </table>
+}
 
+@if (Model.gamess.Any())
+{
+    <br />
+    <br />
+    <h2>Games</h2>
 
-<br />
-<br />
-<h2>Games</h2>
-
-<table class="table">
-
-    @foreach (var item in Model.gamess)
-    {
-    <tr>
-        <td>
-            @item.Name
-        </td>
-        <td>
-            @item.AgeLimit
-        </td>
-        <td>
-            @item.Division
-        </td>
-
-
-    </tr>
-    }
-
-</table>
-
-<br />
-<br />
-<h2>Tournaments</h2>
-<table class="table">
-
-    @foreach (var item in Model.tournamentss)
-    {
+    <table class="table">
         <tr>
-            
-            <td>
-                @item.Name
-            </td>
-            <td>
-                @item.Initials
-            </td>
-            <td>
-                @item.Rules
-            </td>
-            <td>
-                @item.PlayerNumber
-            </td>
-           </tr>
-    }
+            <th>Nom</th>
+            <th>Limite d'âge</th>
+        </tr>
+        @foreach (var item in Model.gamess)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.AgeLimit
+                </td>
+            </tr>
+        }
+    </table>
+}
 
-</table>
+@if (Model.tournamentss.Any())
+{
+    <br />
+    <br />
+    <h2>Tournaments</h2>
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Sigle</th>
+            <th>Règles</th>
+            <th>Taille des équipes</th>
+        </tr>
+        @foreach (var item in Model.tournamentss)
+        {
+            <tr>
+
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Initials
+                </td>
+                <td>
+                    @item.Rules
+                </td>
+                <td>
+                    @item.PlayerNumber
+                </td>
+            </tr>
+        }
+    </table>
+}
