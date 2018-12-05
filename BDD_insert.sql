@@ -75,7 +75,7 @@ INSERT INTO Setting VALUES ('Messages', 0);
 INSERT INTO SettingValues VALUES (1, 'en', 1, 0);
 INSERT INTO SettingValues VALUES (1, 'fr', 0, 0);
 INSERT INTO SettingValues VALUES (1, 'ru', 1, 1);
-INSERT INTO SettingValues VALUES (2, 'on', 0, 0);
+INSERT INTO SettingValues VALUES (2, 'on', 1, 0);
 INSERT INTO SettingValues VALUES (2, 'off', 0, 0);
 
 INSERT INTO Settings VALUES (1, 2, 0);

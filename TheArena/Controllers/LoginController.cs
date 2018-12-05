@@ -27,7 +27,7 @@ namespace TheArena.Controllers
         [HttpPost]
         public ActionResult Index(Geek geek, string returnUrl)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Geek foundGeek = context.Geek.Where(g => g.Username == geek.Username && g.Password == geek.Password && !g.Deleted).FirstOrDefault();
                 if (foundGeek != null)
@@ -54,11 +54,28 @@ namespace TheArena.Controllers
         public ActionResult Register([Bind(Include = "GeekId,Username,Name,Surname,Password,Mail,Birthdate,Deleted")] Geek geek)
         {
             geek.Deleted = false;
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 context.Geek.Add(geek);
                 context.SaveChanges();
-                return Redirect("Index");
+                // On rajoute les valeurs par défaut au moment de l'inscription
+                    
+                context.Settings.AddRange(
+                    context.Setting.Where(s => !s.Deleted)
+                    .Select(s => new {
+                        SettingValue = s.SettingValues.Where(
+                            sv => !sv.Deleted && sv.Preselected
+                        ).FirstOrDefault().SettingValuesId,
+                    }).ToArray()
+                    .Select(s => new Settings()
+                    {
+                        Geek = geek.GeekId,
+                        SettingValue = s.SettingValue,
+                        Deleted = false,
+                    })
+                );
+                context.SaveChanges();
+                return Index(geek, null);
             }
             return View(geek);
         }
