@@ -3,10 +3,12 @@
 @{
     ViewBag.Title = "Create";
 }
+
+<h3 class="text-danger text-center"> @ViewBag.Message</h3>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="row">
         <div class="form-group col-3">
             <label for="tournamentId">Initial du tournoi</label><br>
@@ -47,23 +49,26 @@
     <div class="form-inline">
         <div class="form-group">
             <label for="registeringPeriodStart">Débute le</label>
-            <input type="date" class="form-control m-1" name="registeringPeriodStart" id="registeringPeriodStart" value="" placeholder="DateDebut">
+            @Html.EditorFor(model => model.PeriodRegistration.Start, new { htmlAttributes = new { Name = "registeringPeriodStart", @class = "form-control m-1" } })
+            @Html.ValidationMessageFor(model => model.PeriodRegistration.Start, "", new { @class = "text-danger", datavalmsgfor = "registeringPeriodStart" })
         </div>
         <div class="form-group">
             <label for="registeringPeriodEnd">Termine le</label>
-            <input type="date" class="form-control m-1" name="registeringPeriodEnd" id="registeringPeriodEnd" value="" placeholder="DateFin">
+            @Html.EditorFor(model => model.PeriodRegistration.Ending, new { htmlAttributes = new { Name = "registeringPeriodEnd", @class = "form-control m-1" } })
+            @Html.ValidationMessageFor(model => model.PeriodRegistration.Ending, "", new { @class = "text-danger", datavalmsgfor = "registeringPeriodEnd" })
         </div>
     </div>
     <h4><span class="fa fa-clock"></span> Période de jeux</h4>
     <div class="form-inline">
         <div class="form-group">
             <label for="playingPeriodStart">Débute le</label>
-            <input type="date" class="form-control m-1" id="playingPeriodStart" name="playingPeriodStart" value="" placeholder="DateDebut">
-
+            @Html.EditorFor(model => model.PeriodPlay.Start, new { htmlAttributes = new { Name = "playingPeriodStart", @class = "form-control m-1" } })
+            @Html.ValidationMessageFor(model => model.PeriodPlay.Start, "", new { @class = "text-danger", datavalmsgfor = "playingPeriodStart" })
         </div>
         <div class="form-group">
             <label for="playingPeriodEnd">Termine le</label>
-            <input type="date" class="form-control m-1" id="playingPeriodEnd" name="playingPeriodEnd" value="" placeholder="DateFin">
+            @Html.EditorFor(model => model.PeriodPlay.Ending, new { htmlAttributes = new { Name = "playingPeriodEnd", @class = "form-control m-1" } })
+            @Html.ValidationMessageFor(model => model.PeriodPlay.Ending, "", new { @class = "text-danger", datavalmsgfor = "playingPeriodEnd" })
         </div>
     </div>
 

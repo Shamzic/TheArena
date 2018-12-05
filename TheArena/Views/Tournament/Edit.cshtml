@@ -29,6 +29,8 @@
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
+
+        <h3 class="text-danger text-center"> @ViewBag.Message</h3>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
@@ -69,26 +71,26 @@
             <div class="form-inline">
                 <div class="form-group">
                     <label for="registeringPeriodStart">Débute le</label>
-                    @Html.EditorFor(model => model.PeriodRegistration.Start, new { htmlAttributes = new {Name= "PeriodRegistrationStart", @class = "form-control m-1" } })
-                    @Html.ValidationMessageFor(model => model.PeriodRegistration.Start, "", new { @class = "text-danger" , datavalmsgfor= "PeriodRegistrationStart" })
+                    @Html.EditorFor(model => model.PeriodRegistration.Start, new { htmlAttributes = new { Name = "PeriodRegistrationStart", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodRegistration.Start, "", new { @class = "text-danger", datavalmsgfor = "PeriodRegistrationStart" })
                 </div>
                 <div class="form-group">
                     <label for="registeringPeriodEnd">Termine le</label>
-                    @Html.EditorFor(model => model.PeriodRegistration.Ending, new { htmlAttributes = new {  Name = "PeriodRegistrationEnd", @class = "form-control m-1" } })
-                    @Html.ValidationMessageFor(model => model.PeriodRegistration.Ending, "", new { @class = "text-danger", datavalmsgfor= "PeriodRegistrationEnd" })
+                    @Html.EditorFor(model => model.PeriodRegistration.Ending, new { htmlAttributes = new { Name = "PeriodRegistrationEnd", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodRegistration.Ending, "", new { @class = "text-danger", datavalmsgfor = "PeriodRegistrationEnd" })
                 </div>
             </div>
             <h4><span class="fa fa-clock"></span> Période de jeux</h4>
             <div class="form-inline">
                 <div class="form-group">
                     <label for="playingPeriodStart">Débute le</label>
-                    @Html.EditorFor(model => model.PeriodPlay.Start, new { htmlAttributes = new { Name ="PeriodPlayStart", @class = "form-control m-1" } })
-                    @Html.ValidationMessageFor(model => model.PeriodPlay.Start, "", new { @class = "text-danger", datavalmsgfor="PeriodePlayStart" })
+                    @Html.EditorFor(model => model.PeriodPlay.Start, new { htmlAttributes = new { Name = "PeriodPlayStart", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodPlay.Start, "", new { @class = "text-danger", datavalmsgfor = "PeriodePlayStart" })
                 </div>
                 <div class="form-group">
                     <label for="playingPeriodEnd">Termine le</label>
-                    @Html.EditorFor(model => model.PeriodPlay.Ending, new { htmlAttributes = new { Name = "PeriodPlayEnd" ,@class = "form-control m-1" } })
-                    @Html.ValidationMessageFor(model => model.PeriodPlay.Ending, "", new { @class = "text-danger" , datavalmsgfor = "PeriodePlayEnd" })
+                    @Html.EditorFor(model => model.PeriodPlay.Ending, new { htmlAttributes = new { Name = "PeriodPlayEnd", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodPlay.Ending, "", new { @class = "text-danger", datavalmsgfor = "PeriodePlayEnd" })
                 </div>
             </div>
 

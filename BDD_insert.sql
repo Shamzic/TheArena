@@ -69,21 +69,27 @@ INSERT INTO Tournament VALUES ('TI42', 'The International 42', 'Que le meilleur 
 
 INSERT INTO Participation VALUES (NULL, 1, 1, 1, 0);
 
-INSERT INTO Setting VALUES ('Langue', 'en', 0);
-INSERT INTO Setting VALUES ('Messages', 'on', 0);
+INSERT INTO Setting VALUES ('Langue', 0);
+INSERT INTO Setting VALUES ('Messages', 0);
 
-INSERT INTO Settings VALUES (1, 1, 'fr', 0);
-INSERT INTO Settings VALUES (1, 2, 'on', 0);
-INSERT INTO Settings VALUES (2, 1, 'en', 0);
-INSERT INTO Settings VALUES (2, 2, 'on', 0);
-INSERT INTO Settings VALUES (6, 1, 'en', 0);
-INSERT INTO Settings VALUES (6, 2, 'off', 0);
-INSERT INTO Settings VALUES (3, 1, 'fr', 0);
-INSERT INTO Settings VALUES (3, 2, 'off', 0);
-INSERT INTO Settings VALUES (4, 1, 'fr', 0);
-INSERT INTO Settings VALUES (4, 2, 'on', 0);
-INSERT INTO Settings VALUES (5, 1, 'fr', 1);
-INSERT INTO Settings VALUES (5, 2, 'on', 1);
+INSERT INTO SettingValues VALUES (1, 'en', 1, 0);
+INSERT INTO SettingValues VALUES (1, 'fr', 0, 0);
+INSERT INTO SettingValues VALUES (1, 'ru', 1, 1);
+INSERT INTO SettingValues VALUES (2, 'on', 0, 0);
+INSERT INTO SettingValues VALUES (2, 'off', 0, 0);
+
+INSERT INTO Settings VALUES (1, 2, 0);
+INSERT INTO Settings VALUES (1, 4, 0);
+INSERT INTO Settings VALUES (2, 1, 0);
+INSERT INTO Settings VALUES (2, 4, 0);
+INSERT INTO Settings VALUES (6, 1, 0);
+INSERT INTO Settings VALUES (6, 5, 0);
+INSERT INTO Settings VALUES (3, 2, 0);
+INSERT INTO Settings VALUES (3, 5, 0);
+INSERT INTO Settings VALUES (4, 2, 0);
+INSERT INTO Settings VALUES (4, 4, 0);
+INSERT INTO Settings VALUES (5, 2, 1);
+INSERT INTO Settings VALUES (5, 4, 1);
 
 INSERT INTO FollowTeam VALUES (4, 1, 0);
 

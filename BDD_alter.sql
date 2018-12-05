@@ -41,7 +41,13 @@ ALTER TABLE Result ADD CONSTRAINT FK_Result1 FOREIGN KEY (Loser) REFERENCES Team
 ALTER TABLE Result ADD CONSTRAINT FK_Result2 FOREIGN KEY (Winner) REFERENCES Team (TeamId);
 
 ALTER TABLE Settings ADD CONSTRAINT FK_Settings1 FOREIGN KEY (Geek) REFERENCES Geek (GeekId);
-ALTER TABLE Settings ADD CONSTRAINT FK_Settings2 FOREIGN KEY (Setting) REFERENCES Setting (SettingId);
+ALTER TABLE Settings ADD CONSTRAINT FK_Settings2 FOREIGN KEY (SettingValue) REFERENCES SettingValues (SettingValuesId);
+
+ALTER TABLE SettingValues ADD CONSTRAINT FK_SettingValues FOREIGN KEY (Setting) REFERENCES Setting (SettingId);
+CREATE UNIQUE INDEX IX_SettingValues_SettingValuesId_Preselected
+    ON SettingValues(SettingValuesId)
+    WHERE Preselected = 1
+	AND Deleted = 0;
 
 ALTER TABLE RolesGeek ADD CONSTRAINT FK_RG1 FOREIGN KEY (Role) REFERENCES Roles (RoleId);
 ALTER TABLE RolesGeek ADD CONSTRAINT FK_RG2 FOREIGN KEY (Geek) REFERENCES Geek (GeekId);
