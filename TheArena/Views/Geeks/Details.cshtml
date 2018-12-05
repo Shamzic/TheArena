@@ -13,50 +13,49 @@
         <dt>
             @Html.DisplayNameFor(model => model.Username)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Username)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Surname)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Surname)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Password)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Password)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Mail)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Mail)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Birthdate)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Birthdate)
         </dd>
+
+        @foreach (var setting in Model.Settings)
+        {
+            <dt>
+                @setting.SettingValues.Setting1.Name
+            </dt>
+            <dd>
+                @Html.DisplayFor(s => setting.SettingValues.Value)
+            </dd>
+        }
 
     </dl>
 </div>
