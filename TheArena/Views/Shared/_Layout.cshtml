@@ -19,13 +19,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="container">
                 <div class="row">
-                    @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+
+
+                    <form class="form-inline input-group my-2 my-lg-0 col-lg-5" method="GET" action="/search">
+                        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
     {
-                @Html.TextBox("search")<button class="btn btn-outline-success search-button my-0" type="submit"><span class="fas fa-search"></span> </button>
+
+                    @Html.TextBox("search", null, new { @class = "form-control mr-sm-2 search" }) <button class="btn btn-outline-success search-button my-0" type="submit"><span class="fas fa-search"></span> </button>
+
+
 }
-
-                   
-
+                       
+                    </form>
                     @Html.ActionLink("Recherche Avancée", "Search", "Advanced", new { @class = "nav-link" })
                     <ul class="nav col justify-content-end">
                         @if (User.Identity.IsAuthenticated)

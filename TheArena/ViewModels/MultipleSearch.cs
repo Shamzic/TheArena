@@ -11,6 +11,8 @@ namespace TheArena.ViewModels
         public IEnumerable<Game> gamess{ get; set; }
         public IEnumerable<Geek> geekss { get; set; }
         public IEnumerable<Tournament> tournamentss { get; set; }
+        public IEnumerable<Team> teamss { get; set; }
+
 
     }
 }

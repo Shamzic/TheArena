@@ -21,9 +21,6 @@
                 @item.Surname
             </td>
             <td>
-                @item.Password
-            </td>
-            <td>
                 @item.Mail
             </td>
             <td>
@@ -45,19 +42,19 @@
 
     @foreach (var item in Model.gamess)
     {
-    <tr>
-        <td>
-            @item.Name
-        </td>
-        <td>
-            @item.AgeLimit
-        </td>
-        <td>
-            @item.Division
-        </td>
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.AgeLimit
+            </td>
+            <td>
+                @item.Division
+            </td>
 
 
-    </tr>
+        </tr>
     }
 
 </table>
@@ -70,7 +67,7 @@
     @foreach (var item in Model.tournamentss)
     {
         <tr>
-            
+
             <td>
                 @item.Name
             </td>
@@ -83,7 +80,32 @@
             <td>
                 @item.PlayerNumber
             </td>
-           </tr>
+        </tr>
     }
 
 </table>
+
+<br />
+<br />
+<h2>Teams</h2>
+<table class="table">
+
+    @foreach (var item in Model.teamss)
+    {
+        <tr>
+
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Initials
+            </td>
+            <td>
+                @item.Captain
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<br />
