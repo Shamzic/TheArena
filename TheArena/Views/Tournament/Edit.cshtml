@@ -4,110 +4,212 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Tournament</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.TournamentId)
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
+    </li>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Initials, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Initials, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <li class="nav-item">
+        <a class="nav-link" id="equipes-tab" data-toggle="tab" href="#equipes" role="tab" aria-controls="equipes" aria-selected="false">Equipes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="tags-tab" data-toggle="tab" href="#tags" role="tab" aria-controls="tags" aria-selected="false">Tags</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" id="match-tab" data-toggle="tab" href="#matchs" role="tab" aria-controls="matchs" aria-selected="false">Matchs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="logs-tab" data-toggle="tab" href="#logs" role="tab" aria-controls="logs" aria-selected="false">Logs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="logs-tab" data-toggle="tab" href="#delete" role="tab" aria-controls="delete" aria-selected="false">Supprimer</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Geek.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DisplayFor(model => model.Geek.Username)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Rules, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Rules, new { htmlAttributes = new { @class = "form-control" } })
+        <h3 class="text-danger text-center"> @ViewBag.Message</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.TournamentId)
+            @Html.HiddenFor(model => model.Initials)
+            @Html.HiddenFor(model => model.Organiser)
+            @Html.HiddenFor(model => model.Deleted)
+            @Html.HiddenFor(model => model.Game)
+            @Html.HiddenFor(model => model.PlayingPeriod)
+            @Html.HiddenFor(model => model.RegisteringPeriod)
+            @Html.HiddenFor(model => model.Tags)
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="name">Nom du tournoi</label><br>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <label for="rules"><h5>Règles</h5></label>
+            @Html.TextAreaFor(model => model.Rules, new { @class = "form-control", @placeholder = "Inscrire les règles ici" })
             @Html.ValidationMessageFor(model => model.Rules, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="dropdown-divider"></div>
+            <h5 class="card-title">Paramètre des équipes</h5>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label id="playerNumber">Taille des équipes :</label>
+                    @Html.EditorFor(model => model.PlayerNumber, new { htmlAttributes = new { @class = "form-control m1" } })
+                    @Html.ValidationMessageFor(model => model.PlayerNumber, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label id="slots">Nombre d'équipes :</label>
+                    @Html.EditorFor(model => model.Slots, new { htmlAttributes = new { @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.Slots, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <h4><span class="fa fa-clock"></span> Période d'inscription</h4>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="registeringPeriodStart">Débute le</label>
+                    @Html.EditorFor(model => model.PeriodRegistration.Start, new { htmlAttributes = new { Name = "PeriodRegistrationStart", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodRegistration.Start, "", new { @class = "text-danger", datavalmsgfor = "PeriodRegistrationStart" })
+                </div>
+                <div class="form-group">
+                    <label for="registeringPeriodEnd">Termine le</label>
+                    @Html.EditorFor(model => model.PeriodRegistration.Ending, new { htmlAttributes = new { Name = "PeriodRegistrationEnd", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodRegistration.Ending, "", new { @class = "text-danger", datavalmsgfor = "PeriodRegistrationEnd" })
+                </div>
+            </div>
+            <h4><span class="fa fa-clock"></span> Période de jeux</h4>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="playingPeriodStart">Débute le</label>
+                    @Html.EditorFor(model => model.PeriodPlay.Start, new { htmlAttributes = new { Name = "PeriodPlayStart", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodPlay.Start, "", new { @class = "text-danger", datavalmsgfor = "PeriodePlayStart" })
+                </div>
+                <div class="form-group">
+                    <label for="playingPeriodEnd">Termine le</label>
+                    @Html.EditorFor(model => model.PeriodPlay.Ending, new { htmlAttributes = new { Name = "PeriodPlayEnd", @class = "form-control m-1" } })
+                    @Html.ValidationMessageFor(model => model.PeriodPlay.Ending, "", new { @class = "text-danger", datavalmsgfor = "PeriodePlayEnd" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Slots, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Slots, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Slots, "", new { @class = "text-danger" })
-        </div>
+            <p class="text-right"><button type="submit" class="btn btn-primary">Submit</button></p>
+        }
     </div>
+    <div class="tab-pane fade" id="equipes" role="tabpanel" aria-labelledby="profile-tab">
+        <h3>Equipes participantes : </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nom d'équipe</th>
+                    <th scope="col">Place</th>
+                    <th scope="col">Qualifié</th>
+                    <th scope="col">Modifier</th>
+                    <th scope="col">Disqualifier</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var participation in Model.Participation)
+                {
+                    if (!participation.Deleted && !participation.Team1.Deleted)
+                    {
+                <tr>
+                    @using (Html.BeginForm("Participation", "Tournament", new { Id = Model.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" value="@participation.Team1.TeamId" name="TeamId" id="TeamId" />
+                        @Html.HiddenFor(model => model.TournamentId)
+                        <th scope="row">
+                            @participation.Team1.Name
+                        </th>
+                        <td>
+                            <input type="number" name="place" class="form-control" value="">
+                        </td>
+                        <td>
+                            @Html.CheckBox("isNewlyEnrolled", participation.Qualified)
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-outline-success" value="Modifier">
+                        </td>
+                    }
+                    <td>
+                        @using (Html.BeginForm("Abandon", "Tournament", new { Id = Model.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="teamId" value="@participation.Team1.TeamId" />
+                            @Html.HiddenFor(model => model.TournamentId)
+                            <input type="submit" class="btn btn-outline-danger" value="Disqualifier" />
+                        }
+                    </td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PlayerNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PlayerNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PlayerNumber, "", new { @class = "text-danger" })
-        </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
-        </div>
+    <div class="tab-pane fade" id="logs" role="tabpanel" aria-labelledby="logs-tab">
+        <h1>Logs de ce tournoi :</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col-lg-3">Date</th>
+                    <th scope="col"> Message </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var log in Model.TournamentLog)
+                {
+                    <tr>
+                        <th scope="row">
+                            @log.EntryId
+                        </th>
+                        <td>
+                            @DateTimeOffset.FromUnixTimeSeconds((long)log.Time)
+                        </td>
+                        <td>
+                            @log.Entry
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.RegisteringPeriod, "RegisteringPeriod", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("RegisteringPeriod", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.RegisteringPeriod, "", new { @class = "text-danger" })
-        </div>
+    <div class="tab-pane fade" id="tags" role="tabpanel" aria-labelledby="tags-tab">
+        @foreach (var tag in Model.TournamentTag)
+        {
+            if (!tag.Deleted)
+            {
+                <p>@tag.Tag</p>
+                using (Html.BeginForm("DeleteTag", "Tournament", FormMethod.Post, new { @class = "form-inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="tagId" id="tagId" value="@tag.TagId" />
+                    @Html.HiddenFor(model => model.TournamentId)
+                    <input type="submit" class="btn btn-outline-danger" value="Supprimer" />
+                }
+            }
+        }
+        @using (Html.BeginForm("AddTag", "Tournament", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="input-group">
+                <label for="addTag">Nom du tag à ajouter</label>
+                @Html.HiddenFor(model => model.TournamentId)
+                <input type="text" name="tag" id="tag" class="form-control" />
+            </div>
+            <input type="submit" class="btn btn-outline-success" value="Ajouter" />
+        }
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PlayingPeriod, "PlayingPeriod", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("PlayingPeriod", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.PlayingPeriod, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Game, "Game", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Game", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Game, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
+    <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="delete-tab">
+        Attention, supprimer le tournoi est une action irréversible, êtes vous sûr de vouloir faire ça ?
+        <a href="../Delete/@Model.TournamentId"><button type="button" class="btn btn-outline-danger">Supprimer</button></a>
     </div>
 </div>
-}
 
-    <div>
-        @Html.ActionLink("Back to List", "Index") |
-        @Html.ActionLink("Delete", "Delete", new { id = Model.TournamentId })
-    </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

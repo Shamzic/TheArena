@@ -6,23 +6,28 @@ namespace TheArena.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Setting")]
-    public partial class Setting
+    public partial class SettingValues
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Setting()
+        public SettingValues()
         {
-            SettingValues = new HashSet<SettingValues>();
+            Settings = new HashSet<Settings>();
         }
 
-        public int SettingId { get; set; }
+        public int SettingValuesId { get; set; }
+
+        public int Setting { get; set; }
 
         [StringLength(255)]
-        public string Name { get; set; }
+        public string Value { get; set; }
+
+        public bool Preselected { get; set; }
 
         public bool Deleted { get; set; }
 
+        public virtual Setting Setting1 { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SettingValues> SettingValues { get; set; }
+        public virtual ICollection<Settings> Settings { get; set; }
     }
 }

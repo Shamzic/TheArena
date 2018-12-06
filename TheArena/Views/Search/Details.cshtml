@@ -1,12 +1,12 @@
 ﻿@model TheArena.Models.Geek
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Details";
 }
 
-<h2>Suppression</h2>
 
-<h3>Etes vous sûr de vouloir supprimer ce compte ? Cette action est irréversible.</h3>
+<h2>Details</h2>
+
 <div>
     <h4>Geek</h4>
     <hr />
@@ -36,6 +36,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Mail)
         </dt>
 
@@ -50,13 +58,18 @@
         <dd>
             @Html.DisplayFor(model => model.Birthdate)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deleted)
+        </dd>
+
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GeekId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

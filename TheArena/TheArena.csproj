@@ -129,9 +129,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\PeriodeAttributes.cs" />
     <Compile Include="Controllers\GeeksController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TeamGeeksController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\TournamentController.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Models\ScoreType.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\SettingValues.cs" />
     <Compile Include="Models\Stats.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamGeek.cs" />
@@ -171,6 +174,8 @@
     <Compile Include="Models\Versus.cs" />
     <Compile Include="Models\Visitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TournamentDetailViewModel.cs" />
+    <Compile Include="ViewModels\MultipleSearch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -246,15 +251,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Geeks\Create.cshtml" />
     <Content Include="Views\Geeks\Delete.cshtml" />
     <Content Include="Views\Geeks\Details.cshtml" />
     <Content Include="Views\Geeks\Edit.cshtml" />
-    <Content Include="Views\Geeks\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Tournament\Create.cshtml" />
-    <Content Include="Views\Tournament\Delete.cshtml" />
     <Content Include="Views\Tournament\Details.cshtml" />
     <Content Include="Views\Tournament\Edit.cshtml" />
     <Content Include="Views\Tournament\Index.cshtml" />
@@ -269,10 +271,14 @@
     <Content Include="Views\TeamGeeks\Details.cshtml" />
     <Content Include="Views\TeamGeeks\Edit.cshtml" />
     <Content Include="Views\TeamGeeks\Index.cshtml" />
+    <Content Include="Views\Search\Create.cshtml" />
+    <Content Include="Views\Search\Delete.cshtml" />
+    <Content Include="Views\Search\Details.cshtml" />
+    <Content Include="Views\Search\Edit.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

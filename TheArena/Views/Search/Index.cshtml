@@ -1,0 +1,130 @@
+@model TheArena.ViewModels.MultipleSearch
+@{ ViewBag.Title = "MultipleSearch";}
+
+@if (!Model.geekss.Any() && !Model.gamess.Any() && !Model.tournamentss.Any() && !Model.teamss.Any())
+{
+    <p>Aucun résultat trouvé.</p>
+}
+
+@if (Model.geekss.Any())
+{
+    <h2>Geeks</h2>
+    <table class="table">
+        <tr>
+            <th>Username</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Date de naissance</th>
+        </tr>
+        @foreach (var item in Model.geekss)
+        {
+            <tr>
+                <td>
+                    @item.Username
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Surname
+                </td>
+                <td>
+                    @item.Mail
+                </td>
+                <td>
+                    @item.Birthdate
+                </td>
+
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.gamess.Any())
+{
+    <br />
+    <br />
+    <h2>Games</h2>
+
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Limite d'âge</th>
+        </tr>
+        @foreach (var item in Model.gamess)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.AgeLimit
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.tournamentss.Any())
+{
+    <br />
+    <br />
+    <h2>Tournaments</h2>
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Sigle</th>
+            <th>Règles</th>
+            <th>Taille des équipes</th>
+        </tr>
+        @foreach (var item in Model.tournamentss)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Initials
+                </td>
+                <td>
+                    @item.Rules
+                </td>
+                <td>
+                    @item.PlayerNumber
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.teamss.Any())
+{
+<br />
+<br />
+<h2>Teams</h2>
+<table class="table">
+<tr>
+            <th>Nom</th>
+            <th>Sigle</th>
+            <th>Capitaine</th>
+</tr>
+    @foreach (var item in Model.teamss)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Initials
+            </td>
+            <td>
+                @item.Captain
+            </td>
+        </tr>
+    }
+</table>
+}
+<br />
+<br />
+                

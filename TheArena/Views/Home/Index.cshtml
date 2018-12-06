@@ -24,16 +24,10 @@
             <ul>
                 @foreach (var item in Model)
                 {
-                    <li> @item.Name </li>
+                    <li><a href="@Url.Action("Details", "Tournament", new {id = item.TournamentId })"> @item.Name</a></li>
                 }
             </ul>
         }
-
-        @{
-            //TODO: lien vers la page de creation de tournoi
-            //TODO: lien vers la page de chacun des tournois
-        }
-
     </div>
 </div>
 

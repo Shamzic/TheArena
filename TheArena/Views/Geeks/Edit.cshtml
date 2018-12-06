@@ -1,4 +1,5 @@
 ﻿@model TheArena.Models.Geek
+@using TheArena.Models
 
 @{
     ViewBag.Title = "Edit";
@@ -28,7 +29,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -68,32 +69,52 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Deleted, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.Deleted)
-                            @Html.ValidationMessageFor(model => model.Deleted, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Save" class="btn btn-default" />
                     </div>
                 </div>
             </div>
+            <div>
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Username})
+            </div>
         }
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
         }
     </div>
 
     <div class="tab-pane fade" id="pills-parameters" role="tabpanel" aria-labelledby="pills-profile-tab">
-        <p>TODO MOTHERFUCKER</p>
+        @using (Html.BeginForm("Parameters", "Geeks"))
+        {
+            @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <input type="hidden" name="id" value="@Model.GeekId">
+            @foreach (var setting in (Setting[])ViewBag.Settings)
+            {
+                <div class="form-row px-4">
+                    <label class="col-md-2" for="@setting.Name">@setting.Name</label>
+                    <input type="hidden" name="setting" value="@setting.SettingId">
+                    <div class="col-md-10">
+                        <select name="value" id="@setting.Name">
+                            @foreach (var value in ((SettingValues[])ViewBag.Values).Where(v => v.Setting1.Name == setting.Name))
+                            {
+                                <option value="@value.Value">@value.Value</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group py-3">
+                <div class="col-md-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
     </div>
+
 </div>
 
 

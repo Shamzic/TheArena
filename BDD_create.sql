@@ -26,7 +26,7 @@ CREATE TABLE Ranking (RankingId INT NOT NULL IDENTITY PRIMARY KEY, Standing INT,
 CREATE TABLE Tournament (TournamentId INT NOT NULL IDENTITY PRIMARY KEY, Initials varchar(255) NOT NULL, Name varchar(255), Rules varchar(255), Slots INT, PlayerNumber INT, Tags varchar(255), RegisteringPeriod INT NOT NULL, PlayingPeriod INT NOT NULL, Game INT NOT NULL, Deleted BIT NOT NULL, Organiser INT NOT NULL);
 CREATE TABLE Game (GameId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), AgeLimit INT, GameType INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE Team (TeamId INT NOT NULL IDENTITY PRIMARY KEY, Initials varchar(255), Name varchar(255), Tags varchar(255), Captain INT NOT NULL, Deleted BIT NOT NULL);
-CREATE TABLE Period (PeriodId INT NOT NULL IDENTITY PRIMARY KEY, Start INT, Ending INT, Deleted BIT NOT NULL);
+CREATE TABLE Period (PeriodId INT NOT NULL IDENTITY PRIMARY KEY, Start smalldatetime, Ending smalldatetime, Deleted BIT NOT NULL);
 CREATE TABLE Participation (ParticipationId INT NOT NULL IDENTITY PRIMARY KEY, Place INT, Qualified BIT NOT NULL, Team INT NOT NULL, Tournament INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE Versus (VersusId INT NOT NULL IDENTITY PRIMARY KEY, Team1 INT, Team2 INT, VersusPeriod INT NOT NULL, Result INT NOT NULL, Tournament INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE Reason (ReasonId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Description varchar(255), Deleted BIT NOT NULL);
@@ -39,8 +39,8 @@ CREATE TABLE Visitor (VisitorId INT NOT NULL IDENTITY PRIMARY KEY, Ip varchar(25
 CREATE TABLE Geek (GeekId INT NOT NULL IDENTITY PRIMARY KEY, Username varchar(255) NOT NULL, Name varchar(255), Surname varchar(255), Password varchar(255), Mail varchar(255), Birthdate varchar(10), Deleted BIT NOT NULL);
 CREATE TABLE Result (ResultId INT NOT NULL IDENTITY PRIMARY KEY, Loser INT NOT NULL, Winner INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE Roles (RoleId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Deleted BIT NOT NULL);
-CREATE TABLE Settings (SettingsId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Setting INT NOT NULL, Value varchar(255), Deleted BIT NOT NULL);
-CREATE TABLE Setting (SettingId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Preselected varchar(255), Deleted BIT NOT NULL);
+CREATE TABLE Settings (SettingsId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, SettingValue INT NOT NULL, Deleted BIT NOT NULL);
+CREATE TABLE Setting (SettingId INT NOT NULL IDENTITY PRIMARY KEY, Name varchar(255), Deleted BIT NOT NULL);
 CREATE TABLE RolesGeek (RolesGeekId INT NOT NULL IDENTITY PRIMARY KEY, Role INT NOT NULL, Geek INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE TeamGeek (TeamGeekId INT NOT NULL IDENTITY PRIMARY KEY, Player INT NOT NULL, Team INT NOT NULL, Deleted BIT NOT NULL);
 CREATE TABLE FollowTeam (FollowTeamId INT NOT NULL IDENTITY PRIMARY KEY, Geek INT NOT NULL, Team INT NOT NULL, Deleted BIT NOT NULL);
@@ -50,3 +50,4 @@ CREATE TABLE FollowTournament (FollowTournamentId INT NOT NULL IDENTITY PRIMARY 
 CREATE TABLE TournamentLog (EntryId INT NOT NULL IDENTITY PRIMARY KEY, Tournament INT NOT NULL, Entry varchar(255), Time INT, Deleted BIT);
 CREATE TABLE TournamentTag (TagId INT NOT NULL IDENTITY PRIMARY KEY, Tournament INT NOT NULL, Tag varchar(255), Deleted BIT);
 CREATE TABLE TeamTag (TagId INT NOT NULL IDENTITY PRIMARY KEY, Team INT NOT NULL, Tag varchar(255), Deleted BIT); 
+CREATE TABLE SettingValues (SettingValuesId INT NOT NULL IDENTITY PRIMARY KEY, Setting INT NOT NULL, Value varchar(255), Preselected BIT NOT NULL, Deleted BIT NOT NULL);
