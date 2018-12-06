@@ -42,15 +42,18 @@
         </td>
         <td>
             <div class="btn btn-outline-primary">
-                @Html.ActionLink("Éditer", "Edit", new { id = item.TeamId })
-            </div>
-            <div class="btn btn-outline-primary">
                 @Html.ActionLink("Détails", "Details", new { id = item.TeamId })
             </div>
-            <div class="btn btn-outline-danger">
-                @Html.ActionLink("Supprimer", "Delete", new { id = item.TeamId })
-            </div>
-</td>
+            @if (item.Geek.Username.Equals(User.Identity.Name))
+            {
+                <div class="btn btn-outline-primary">
+                    @Html.ActionLink("Éditer", "Edit", new { id = item.TeamId })
+                </div>
+                <div class="btn btn-outline-danger">
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.TeamId })
+                </div>
+            }
+        </td>
     </tr>
 }
 

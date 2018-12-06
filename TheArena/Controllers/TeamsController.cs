@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TheArena.Models;
+using TheArena.ViewModels;
 
 namespace TheArena.Controllers
 {
@@ -30,11 +31,23 @@ namespace TheArena.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Team team = await db.Team.FindAsync(id);
+            List<TeamGeek> teamList = db.TeamGeek.Where(o => o.Team == id).ToList();
+            List<Geek> teamGeekList = new List<Geek>();
+            foreach (var t in teamList)
+            {
+                teamGeekList.Add(t.Geek);
+            }
+            TeamViewModel viewModel = new TeamViewModel
+            {
+                team = team,
+                geekTeamList = teamGeekList,
+
+            };
             if (team == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(viewModel);
         }
 
         // GET: Teams/Create

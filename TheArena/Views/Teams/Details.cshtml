@@ -1,4 +1,4 @@
-﻿@model TheArena.Models.Team
+﻿@model  TheArena.ViewModels.TeamViewModel
 
 @{
     /**/
@@ -19,7 +19,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Geek.Username)
+                @Html.DisplayFor(model => model.team.Geek.Username)
             </dd>
 
             <dt>
@@ -27,7 +27,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Initials)
+                @Html.DisplayFor(model => model.team.Initials)
             </dd>
 
             <dt>
@@ -35,33 +35,58 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Name)
+                @Html.DisplayFor(model => model.team.Name)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Tags)
+                @Html.DisplayNameFor(model => model.team.Tags)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Tags)
+                @Html.DisplayFor(model => model.team.Tags)
             </dd>
+
+            <dt>
+                Membres de l'équipe
+            </dt>
+
+            <dd>
+                @foreach (var geek in Model.geekTeamList)
+                {
+                    <p>@geek.Username</p>
+                }
+            </dd>
+
         </dl>
-    </div>
 
-
-    <div class="btn btn-outline-primary col-md-3">
-
-        @Html.ActionLink("Éditer", "Edit", new { id = Model.TeamId })
     </div>
 }
-<div class="form-actions no-color">
-    @if (User.Identity.IsAuthenticated)
+@if (Model.team.Geek.Username.Equals(User.Identity.Name))
+{
+    <div class="btn btn-outline-primary col-md-3">
+
+        @Html.ActionLink("Éditer", "Edit", new { id = Model.team.TeamId })
+    </div>
+}
+
+@{bool test = true; }
+@foreach (var geek in Model.geekTeamList)
     {
-        <div class="btn btn-outline-success col-md-3">
-            @Html.ActionLink("S'inscrire dans cette équipe", "Create", "TeamGeeks", new { }, null)
+    if(geek.Username == (User.Identity.Name))
+    {
+        test = false;
+    }
+}
+
+
+    @if (User.Identity.IsAuthenticated && (Model.team.Geek.Username != User.Identity.Name) && test!=false)
+    {
+        <div class="form-actions no-color">
+            <div class="btn btn-outline-success col-md-3">
+                @Html.ActionLink("S'inscrire dans cette équipe", "Create", "TeamGeeks", new { }, null)
+            </div>
         </div>
     }
-    </div>
 
 
     <div class="btn btn-outline-dark col-md-3">
