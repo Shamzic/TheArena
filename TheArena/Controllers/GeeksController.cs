@@ -20,7 +20,7 @@ namespace TheArena.Controllers
         // GET: Geeks
         public ActionResult Index()
         {
-         return RedirectToAction("Details", new { id = User.Identity.Name });
+            return RedirectToAction("Details", new { id = User.Identity.Name });
         }
 
         // GET: Geeks/Details/5
@@ -46,6 +46,8 @@ namespace TheArena.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Settings = db.Setting.Where(s => s.Deleted == false).ToArray();
+            ViewBag.Values = db.SettingValues.Where(v => v.Deleted == false).ToArray();
             return View(geek);
         }
 
@@ -89,6 +91,26 @@ namespace TheArena.Controllers
             Geek geek = db.Geek.Where(p => p.Username == id).FirstOrDefault();
             geek.Deleted = true;
             db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [ValidateAntiForgeryToken]
+        public ActionResult Parameters(List<int> setting, List<string> value, int id)
+        {
+            using (var e1 = setting.GetEnumerator())
+            using (var e2 = value.GetEnumerator())
+            {
+                while (e1.MoveNext() && e2.MoveNext())
+                {
+                    var s = e1.Current;
+                    var v = e2.Current;
+
+                    SettingValues sv = db.SettingValues.Where(x => !x.Deleted && x.Setting == s && x.Value == v).FirstOrDefault();
+                    Settings settings = db.Settings.Where(y => y.Geek == id && y.SettingValues.Setting == s).FirstOrDefault();
+                    settings.SettingValues = sv;
+                    db.SaveChanges();
+                }
+            }
             return RedirectToAction("Index");
         }
 

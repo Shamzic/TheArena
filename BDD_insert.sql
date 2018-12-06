@@ -75,21 +75,21 @@ INSERT INTO Setting VALUES ('Messages', 0);
 INSERT INTO SettingValues VALUES (1, 'en', 1, 0);
 INSERT INTO SettingValues VALUES (1, 'fr', 0, 0);
 INSERT INTO SettingValues VALUES (1, 'ru', 1, 1);
-INSERT INTO SettingValues VALUES (2, 'on', 0, 0);
+INSERT INTO SettingValues VALUES (2, 'on', 1, 0);
 INSERT INTO SettingValues VALUES (2, 'off', 0, 0);
 
 INSERT INTO Settings VALUES (1, 2, 0);
-INSERT INTO Settings VALUES (1, 3, 0);
+INSERT INTO Settings VALUES (1, 4, 0);
 INSERT INTO Settings VALUES (2, 1, 0);
-INSERT INTO Settings VALUES (2, 3, 0);
+INSERT INTO Settings VALUES (2, 4, 0);
 INSERT INTO Settings VALUES (6, 1, 0);
-INSERT INTO Settings VALUES (6, 4, 0);
+INSERT INTO Settings VALUES (6, 5, 0);
 INSERT INTO Settings VALUES (3, 2, 0);
-INSERT INTO Settings VALUES (3, 4, 0);
+INSERT INTO Settings VALUES (3, 5, 0);
 INSERT INTO Settings VALUES (4, 2, 0);
-INSERT INTO Settings VALUES (4, 3, 0);
+INSERT INTO Settings VALUES (4, 4, 0);
 INSERT INTO Settings VALUES (5, 2, 1);
-INSERT INTO Settings VALUES (5, 3, 1);
+INSERT INTO Settings VALUES (5, 4, 1);
 
 INSERT INTO FollowTeam VALUES (4, 1, 0);
 

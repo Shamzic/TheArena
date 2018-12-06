@@ -5,6 +5,7 @@ namespace TheArena.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using TheArena.Annotation;
 
     [Table("Geek")]
     public partial class Geek
@@ -46,11 +47,12 @@ namespace TheArena.Models
 
         [StringLength(255)]
         [Index(IsUnique = true)]
-        [RegularExpression(@"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$", ErrorMessage = "Merci de vérfier le format de l'adresse mail.")]
+        [RegularExpression(@"^\w+@[\w]+?\.[a-zA-Z]{2,3}$", ErrorMessage = "Merci de vérfier le format de l'adresse mail.")]
         public string Mail { get; set; }
 
         [StringLength(10)]
         [RegularExpression(@"^(?:19|20)\d{2}-[01]\d-[0-3]\d$", ErrorMessage = "Merci d'entrer une date correcte.")]
+        [DateCheck]
         public string Birthdate { get; set; }
 
         public bool Deleted { get; set; }
