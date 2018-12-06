@@ -54,14 +54,16 @@ namespace TheArena.Controllers
         {
             if (ModelState.IsValid)
             {
+                teamGeek.Player = 2;
+                Geek geek = db.Geek.Where(g => g.Username == User.Identity.Name).FirstOrDefault();
+                teamGeek.Player = geek.GeekId;
                 db.TeamGeek.Add(teamGeek);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            //ViewBag.Player = new SelectList(db.Geek, "GeekId", "Username", teamGeek.Player);
-            ViewBag.Player = new SelectList(db.Geek, "GeekId", "Username", teamGeek.Player);
-            ViewBag.Team = new SelectList(db.Team, "TeamId", "Initials", teamGeek.Team);
+            
+            //ViewBag.Player = new SelectList(db.Geek, "GeekId", "Username", User.Identity);
+            //ViewBag.Team = new SelectList(db.Team, "TeamId", "Initials", teamGeek.Team);
             return View(teamGeek);
         }
 
