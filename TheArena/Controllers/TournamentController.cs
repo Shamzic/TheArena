@@ -290,6 +290,11 @@ namespace TheArena.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Participate([Bind(Include ="TeamID")]Team team, [Bind(Include = "TournamentId")]Tournament tournament)
         {
+            if(db.Team.Find(team).TeamGeek.Count != db.Tournament.Find(tournament).PlayerNumber)
+            {
+                ViewBag.Message = "Le nombre de membres de l'équipe ne correspond pas aux prérequis du tournois";
+                return RedirectToAction("Details", new { id = tournament.TournamentId });
+            }
             Participation participation = db.Participation.Where(p => p.Team == team.TeamId && p.Tournament== tournament.TournamentId).FirstOrDefault();
             if (participation != null)
             {
