@@ -120,7 +120,7 @@
                 if (!item.Deleted)
                 {
                     <div class="card-body">
-                        @Html.DisplayFor(m => item.Team1.Name)
+                        <li><a href="@Url.Action("Details", "Teams", new {id = item.Team1.TeamId })"> @item.Team1.Name</a></li>
                     </div>
                 }
             }
