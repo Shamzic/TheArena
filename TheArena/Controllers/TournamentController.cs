@@ -108,7 +108,7 @@ namespace TheArena.Controllers
                 ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
                 return View(tournament);
             }
-            if(db.Tournament.Where(t => t.Initials == tournament.Initials) != null)
+            if(db.Tournament.Any(t => t.Initials == tournament.Initials))
             {
                 ViewBag.Message = "Les initiales de tournoi est déja pris";
                 ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
@@ -117,7 +117,7 @@ namespace TheArena.Controllers
                 ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
                 return View(tournament);
             }
-            if (db.Tournament.Where(t => t.Name == tournament.Name) != null)
+            if (db.Tournament.Any(t => t.Name == tournament.Name))
             {
                 ViewBag.Message = "Le nom de tournoi est déja pris";
                 ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
@@ -226,6 +226,15 @@ namespace TheArena.Controllers
             if (PeriodRegistrationStart < DateTime.UtcNow && PeriodRegistrationStart != db.Tournament.Find(tournament.TournamentId).PeriodRegistration.Start)
             {
                 ViewBag.Message = "La date de début des inscription doit être ultérieur à la date courante";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
+            if (db.Tournament.Any(t => t.Name == tournament.Name) && tournament.Name != db.Tournament.Find(tournament.TournamentId).Name) 
+            {
+                ViewBag.Message = "Le nom de tournoi est déja pris";
                 ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
                 ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
                 ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
