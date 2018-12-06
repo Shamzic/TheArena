@@ -27,7 +27,7 @@ namespace TheArena.Controllers
         [HttpPost]
         public ActionResult Index(Geek geek, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!String.IsNullOrWhiteSpace(geek.Username) && !String.IsNullOrWhiteSpace(geek.Password))
             {
                 Geek foundGeek = context.Geek.Where(g => g.Username == geek.Username && g.Password == geek.Password && !g.Deleted).FirstOrDefault();
                 if (foundGeek != null)
