@@ -83,7 +83,7 @@
     {
         <div class="form-actions no-color">
             <div class="btn btn-outline-success col-md-3">
-                @Html.ActionLink("S'inscrire dans cette équipe", "Create", "TeamGeeks", new { }, null)
+                @Html.ActionLink("S'inscrire dans cette équipe", "Create", "TeamGeeks", new { teamID = Model.team.TeamId, teamName = Model.team.Name}, null)
             </div>
         </div>
     }

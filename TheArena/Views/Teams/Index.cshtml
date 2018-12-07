@@ -20,9 +20,6 @@
         <th>
             <h5>Nom d'équipe</h5>
         </th>
-        <th>
-            <h5>Tags</h5>
-        </th>
         <th></th>
     </tr>
 
@@ -38,11 +35,8 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Tags)
-        </td>
-        <td>
             <div class="btn btn-outline-primary">
-                @Html.ActionLink("Détails", "Details", new { id = item.TeamId })
+                @Html.ActionLink("Détails", "Details", new { htmlAttributes = new { @class = "" }, id = item.TeamId })
             </div>
             @if (item.Geek.Username.Equals(User.Identity.Name))
             {

@@ -64,13 +64,15 @@ namespace TheArena.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "TeamId,Initials,Name,Tags,Captain,Deleted")] Team team)
         {
+
             if (ModelState.IsValid)
             {
+                Geek capitaine = db.Geek.Where(g => g.Username == User.Identity.Name).FirstOrDefault();
+                team.Captain = capitaine.GeekId;
                 db.Team.Add(team);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
             ViewBag.Captain = new SelectList(db.Geek, "GeekId", "Username", team.Captain);
             return View(team);
         }
