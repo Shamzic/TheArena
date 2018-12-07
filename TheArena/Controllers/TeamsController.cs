@@ -64,7 +64,6 @@ namespace TheArena.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "TeamId,Initials,Name,Tags,Captain,Deleted")] Team team)
         {
-
             if (ModelState.IsValid)
             {
                 Geek capitaine = db.Geek.Where(g => g.Username == User.Identity.Name).FirstOrDefault();
@@ -138,11 +137,13 @@ namespace TheArena.Controllers
             List<TeamGeek> teamgeek = db.TeamGeek.Where( t => t.Team == id).ToList();
             foreach(TeamGeek tg in teamgeek)
             {
-                db.TeamGeek.Remove(tg);
+                //db.TeamGeek.Remove(tg);
+                tg.Deleted = true;
             }
 
             Team team = await db.Team.FindAsync(id);
-            db.Team.Remove(team);
+            // db.Team.Remove(team);
+            team.Deleted = true;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
