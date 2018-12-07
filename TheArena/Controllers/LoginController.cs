@@ -40,7 +40,7 @@ namespace TheArena.Controllers
                 }
             }
 
-            ModelState.AddModelError("Geek.Username", "Username et/ou mot de passe incorrect.");
+            ModelState.AddModelError("Username", "Username et/ou mot de passe incorrect.");
             return View(geek);
         }
 
