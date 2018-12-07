@@ -5,10 +5,11 @@
 
 <div class="row">
     <div class="col-12">
+        
         <div class="">
             <h1 class="text-center">
                 @Html.DisplayFor(model => model.tournament.Name)
-
+                <h3 class="text-danger text-center"> @ViewBag.Message</h3>
                 @if (Model.tournament.Geek.Username == User.Identity.Name)
                 {
                     <a href="../Edit/@Html.DisplayFor(model => model.tournament.TournamentId)">@Html.Raw("<button type=\"button\" class=\"btn btn - outline - success\"><span class=\"fas fa - cog\"></span></button>")</a>
@@ -41,6 +42,7 @@
                     {
                         using (Html.BeginForm("Participate", "Tournament", new { Id = Model.tournament.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
                         {@Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.tournament.TournamentId)
                         <select class="form-control" name="teamId">
                             @foreach (var team in Model.geek.Team)
                             {
@@ -54,6 +56,8 @@
                 {
                     using (Html.BeginForm("Abandon", "Tournament", new { Id = Model.tournament.TournamentId }, FormMethod.Post, new { @class = "form-inline" }))
                     {
+
+                        @Html.HiddenFor(model => model.tournament.TournamentId)
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="teamId" value="@canLeave" />
                         <input type="submit" class="btn btn-outline-danger" value="Abandonner" />

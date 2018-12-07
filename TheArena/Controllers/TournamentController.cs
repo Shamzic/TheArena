@@ -299,10 +299,18 @@ namespace TheArena.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Participate([Bind(Include ="TeamID")]Team team, [Bind(Include = "TournamentId")]Tournament tournament)
         {
-            if(db.Team.Find(team).TeamGeek.Count != db.Tournament.Find(tournament).PlayerNumber)
+
+            if(db.TeamGeek.Where(tg => tg.Team == team.TeamId && !tg.Deleted).Count() != db.Tournament.Find(tournament.TournamentId).PlayerNumber)
             {
                 ViewBag.Message = "Le nombre de membres de l'équipe ne correspond pas aux prérequis du tournois";
-                return RedirectToAction("Details", new { id = tournament.TournamentId });
+                Tournament tournamentId = db.Tournament.Find(tournament.TournamentId);
+                Geek user = db.Geek.Where(g => g.Username == User.Identity.Name && !g.Deleted).FirstOrDefault();
+                TournamentDetailViewModel viewModel = new TournamentDetailViewModel
+                {
+                    tournament = tournamentId,
+                    geek = user,
+                };
+                return View("Details", viewModel);
             }
             Participation participation = db.Participation.Where(p => p.Team == team.TeamId && p.Tournament== tournament.TournamentId).FirstOrDefault();
             if (participation != null)
