@@ -60,7 +60,7 @@ namespace TheArena.Controllers
                 teamGeek.Team = teamID;
                 db.TeamGeek.Add(teamGeek);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Teams");
+                return RedirectToAction("Index", "Teams/Details/"+ teamID);
             }
             
             //ViewBag.Player = new SelectList(db.Geek, "GeekId", "Username", User.Identity);

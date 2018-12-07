@@ -144,32 +144,5 @@ namespace TheArena.Controllers
             }
             base.Dispose(disposing);
         }
-
-        // GET: Teams/Inscription/5
-        public async Task<ActionResult> Inscription(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Team team = await db.Team.FindAsync(id);
-            if (team == null)
-            {
-                return HttpNotFound();
-            }
-            return View(team);
-        }
-
-        //// POST: Teams/Inscription/5
-        [HttpPost, ActionName("Inscription")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> InscriptionConfirmed(int id)
-        {
-            Team team = await db.Team.FindAsync(id);
-            //db.Team.Remove(team);
-
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
     }
 }
