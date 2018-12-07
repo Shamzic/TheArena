@@ -63,7 +63,7 @@
 
 
 
-        @foreach (var item in Model.geekss)
+        @foreach (var item in Model.Geeks)
         {
             <tr>
                 <td>
@@ -102,7 +102,7 @@
             <th>Règles</th>
             <th>Taille des équipes</th>
         </tr>
-        @foreach (var item in Model.tournamentss)
+        @foreach (var item in Model.Tournaments)
         {
             <tr>
                 <td>
@@ -137,7 +137,7 @@
             <th>Sigle</th>
             <th>Capitaine</th>
         </tr>
-        @foreach (var item in Model.teamss)
+        @foreach (var item in Model.Teams)
         {
 
             <tr>
@@ -166,7 +166,7 @@
             <th>Nom</th>
             <th>Limite d'âge</th>
         </tr>
-        @foreach (var item in Model.gamess)
+        @foreach (var item in Model.Games)
         {
             <tr>
                 <td>
@@ -219,7 +219,6 @@
         }
         else {
             document.getElementById('game').style.display = 'none';
-
         }
     }
 </script>

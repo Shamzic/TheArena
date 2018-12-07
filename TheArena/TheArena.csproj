@@ -160,6 +160,7 @@
     <Compile Include="Models\Round.cs" />
     <Compile Include="Models\Score.cs" />
     <Compile Include="Models\ScoreType.cs" />
+    <Compile Include="Models\SearchType.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\SettingValues.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Models\Versus.cs" />
     <Compile Include="Models\Visitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AdvancedSearch.cs" />
     <Compile Include="ViewModels\TeamViewModel.cs" />
     <Compile Include="ViewModels\AdvancedSearchViewModel.cs" />
     <Compile Include="ViewModels\TournamentDetailViewModel.cs" />
@@ -273,11 +275,9 @@
     <Content Include="Views\TeamGeeks\Details.cshtml" />
     <Content Include="Views\TeamGeeks\Edit.cshtml" />
     <Content Include="Views\TeamGeeks\Index.cshtml" />
-    <Content Include="Views\Search\Create.cshtml" />
-    <Content Include="Views\Search\Delete.cshtml" />
     <Content Include="Views\Search\Details.cshtml" />
-    <Content Include="Views\Search\Edit.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\AdvancedSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

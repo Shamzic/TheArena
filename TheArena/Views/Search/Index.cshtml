@@ -1,12 +1,12 @@
 @model TheArena.ViewModels.MultipleSearch
 @{ ViewBag.Title = "MultipleSearch";}
 
-@if (!Model.geekss.Any() && !Model.gamess.Any() && !Model.tournamentss.Any() && !Model.teamss.Any())
+@if ((Model.Geeks == null || !Model.Geeks.Any()) && (Model.Games == null || !Model.Games.Any()) && (Model.Tournaments == null || !Model.Tournaments.Any()) && (Model.Teams == null || !Model.Teams.Any()))
 {
     <p>Aucun résultat trouvé.</p>
 }
 
-@if (Model.geekss.Any())
+@if (Model.Geeks != null && Model.Geeks.Any())
 {
     <h2>Geeks</h2>
     <table class="table">
@@ -17,7 +17,7 @@
             <th>Email</th>
             <th>Date de naissance</th>
         </tr>
-        @foreach (var item in Model.geekss)
+        @foreach (var item in Model.Geeks)
         {
             <tr>
                 <td>
@@ -41,7 +41,7 @@
     </table>
 }
 
-@if (Model.gamess.Any())
+@if (Model.Games != null && Model.Games.Any())
 {
     <br />
     <br />
@@ -52,7 +52,7 @@
             <th>Nom</th>
             <th>Limite d'âge</th>
         </tr>
-        @foreach (var item in Model.gamess)
+        @foreach (var item in Model.Games)
         {
             <tr>
                 <td>
@@ -66,7 +66,7 @@
     </table>
 }
 
-@if (Model.tournamentss.Any())
+@if (Model.Tournaments != null && Model.Tournaments.Any())
 {
     <br />
     <br />
@@ -78,7 +78,7 @@
             <th>Règles</th>
             <th>Taille des équipes</th>
         </tr>
-        @foreach (var item in Model.tournamentss)
+        @foreach (var item in Model.Tournaments)
         {
             <tr>
                 <td>
@@ -99,7 +99,7 @@
     </table>
 }
 
-@if (Model.teamss.Any())
+@if (Model.Teams != null && Model.Teams.Any())
 {
 <br />
 <br />
@@ -110,7 +110,7 @@
             <th>Sigle</th>
             <th>Capitaine</th>
 </tr>
-    @foreach (var item in Model.teamss)
+    @foreach (var item in Model.Teams)
     {
       
         <tr>

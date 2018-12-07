@@ -1,0 +1,243 @@
+﻿@using TheArena.Models
+@model TheArena.ViewModels.AdvancedSearch
+@{
+    ViewBag.Title = "AdvancedSearch";
+}
+
+<h2>Que souhaitez vous rechercher ?</h2>
+
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Search, new { @class = "form-control", @onclick = "show()" })
+            @Html.ValidationMessageFor(model => model.Search, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div id="TournamentSearch">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(model => model.Search, new { Value = "0" })
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Initials, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Initials, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegistrationOpen, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.RegistrationOpen)
+                        @Html.ValidationMessageFor(model => model.RegistrationOpen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TournamentOpen, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.TournamentOpen)
+                        @Html.ValidationMessageFor(model => model.TournamentOpen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(model => model.Game, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <select name="Game" class="form-control form-control-sm">
+                        <option value="-1">Tous</option>
+                        @foreach (var game in ((Game[])ViewBag.Games))
+                        {
+                            <option value="@game.GameId">@game.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumberTeamRegistered, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NumberTeamRegistered, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumberTeamRegistered, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    <div id="TeamSearch" style="display:none">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Search, new { Value = "1" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Initials, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Initials, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(model => model.Game, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <select name="Game" class="form-control form-control-sm">
+                        <option value="-1">Tous</option>
+                        @foreach (var game in ((Game[])ViewBag.Games))
+                        {
+                            <option value="@game.GameId">@game.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-10">
+                    @Html.LabelFor(model => model.Geek, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <select name="Geek" class="form-control form-control-sm">
+                        <option value="-1">Tous</option>
+                        @foreach (var geek in ((Geek[])ViewBag.Geeks))
+                        {
+                            <option value="@geek.GeekId">@geek.Username</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-10">
+                    @Html.LabelFor(model => model.Tournament, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <select name="Tournament" class="form-control form-control-sm">
+                        <option value="-1">Tous</option>
+                        @foreach (var tournament in ((Tournament[])ViewBag.Tournaments))
+                        {
+                            <option value="@tournament.TournamentId">@tournament.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumberTournementJoined, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NumberTournementJoined, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumberTournementJoined, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    <div id="GeekSearch" style="display:none">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Search, new { Value = "2" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(model => model.Game, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <select name="Game" class="form-control form-control-sm">
+                        <option value="-1">Tous</option>
+                        @foreach (var game in ((Game[])ViewBag.Games))
+                        {
+                            <option value="@game.GameId">@game.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-10">
+                    @Html.LabelFor(model => model.Tournament, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <select name="Tournament" class="form-control form-control-sm">
+                        <option value="-1">Tous</option>
+                        @foreach (var tournament in ((Tournament[])ViewBag.Tournaments))
+                        {
+                            <option value="@tournament.TournamentId">@tournament.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumberTeamRegistered, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NumberTeamRegistered, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumberTeamRegistered, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    
+
+    <script>
+        (function () {
+            show();
+        })();
+        function show() {
+            let choice = document.getElementById('Search').value;
+            switch (choice) {
+                case '0':
+                    showDiv('TournamentSearch');
+                    hideDiv('TeamSearch');
+                    hideDiv('GeekSearch');
+                    break;
+                case '1':
+                    hideDiv('TournamentSearch');
+                    showDiv('TeamSearch');
+                    hideDiv('GeekSearch');
+                    break;
+                case '2':
+                    hideDiv('TournamentSearch');
+                    hideDiv('TeamSearch');
+                    showDiv('GeekSearch');
+                    break;
+                default:
+                    hideDiv('TournamentSearch');
+                    hideDiv('TeamSearch');
+                    hideDiv('GeekSearch');
+            }
+
+        }
+        function showDiv(divId) {
+            document.getElementById(divId).style.display = 'block';
+        }
+        function hideDiv(divId) {
+            document.getElementById(divId).style.display = 'none';
+        }
+    </script>

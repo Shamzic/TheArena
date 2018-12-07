@@ -7,11 +7,11 @@ namespace TheArena.ViewModels
 {
     public class AdvancedSearchViewModel
     {
-        public IEnumerable<Game> gamess { get; set; }
-        public IEnumerable<Geek> geekss { get; set; }
-        public IEnumerable<Tournament> tournamentss { get; set; }
-        public IEnumerable<Team> teamss { get; set; }
-        public IEnumerable<TeamTag> teamTagss { get; set; }
-        public IEnumerable<TournamentTag> tournamentTagss { get; set; }
+        public IEnumerable<Game> Games { get; set; }
+        public IEnumerable<Geek> Geeks { get; set; }
+        public IEnumerable<Tournament> Tournaments { get; set; }
+        public IEnumerable<Team> Teams { get; set; }
+        public IEnumerable<TeamTag> TeamTags { get; set; }
+        public IEnumerable<TournamentTag> TournamentTags { get; set; }
     }
 }
