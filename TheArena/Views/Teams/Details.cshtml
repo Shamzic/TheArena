@@ -1,4 +1,4 @@
-﻿@model TheArena.Models.Team
+﻿@model  TheArena.ViewModels.TeamViewModel
 
 @{
     /**/
@@ -19,7 +19,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Geek.Username)
+                @Html.DisplayFor(model => model.team.Geek.Username)
             </dd>
 
             <dt>
@@ -27,7 +27,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Initials)
+                @Html.DisplayFor(model => model.team.Initials)
             </dd>
 
             <dt>
@@ -35,35 +35,94 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Name)
+                @Html.DisplayFor(model => model.team.Name)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Tags)
+                @Html.DisplayNameFor(model => model.team.Tags)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Tags)
+                @Html.DisplayFor(model => model.team.Tags)
+            </dd>
+
+            <dt>
+                Membres de l'équipe
+            </dt>
+
+            <dd>
+                @{var gtsaveID = 0; var gsaveID = 0; var gtsaveBool = false; var gtCaptainName = "";}
+
+
+                @foreach (var geek in Model.geekTeamList)
+                {
+                    foreach (var gt in Model.teamList)
+                    {
+                        if (gt.Player == geek.GeekId)
+                        {
+                            gtsaveID = gt.TeamGeekId;
+                            gsaveID = geek.GeekId;
+                            gtsaveBool = gt.Deleted;
+
+                            if (gt.Player == Model.team.Captain)
+                            {
+                                gtCaptainName = geek.Username;
+                            }
+                        }
+                    }
+                    if (gtsaveBool == false)
+                    {
+                <div style="display:inline; margin-right: 20px;">
+                    @geek.Username
+                </div>
+                        
+                        if (@gtsaveID != Model.team.Captain && User.Identity.Name == gtCaptainName)
+                        {
+                            @Html.ActionLink("Supprimer", "Delete", "TeamGeeks", new { id = gtsaveID }, new { @class = "btn btn-outline-danger" })
+                        }
+                        <div style="margin-top: 5px;"/>
+                    }
+                 }
             </dd>
         </dl>
-    </div>
 
-
-    <div class="btn btn-outline-primary col-md-3">
-
-        @Html.ActionLink("Éditer", "Edit", new { id = Model.TeamId })
     </div>
 }
-<div class="form-actions no-color">
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div class="btn btn-outline-success col-md-3">
-            @Html.ActionLink("S'inscrire dans cette équipe", "Create", "TeamGeeks", new { }, null)
+    <div class="form-group">
+        @if (Model.team.Geek.Username.Equals(User.Identity.Name))
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-3">
+                    @Html.ActionLink("Éditer", "Edit", new { id = Model.team.TeamId }, new { @class = "btn btn-outline-primary" })
+                </div>
+            </div>
+        }
+
+        @{bool test = true; }
+        @foreach (var geek in Model.geekTeamList)
+        {
+            if (geek.Username == (User.Identity.Name))
+            {
+                test = false;
+            }
+        }
+
+
+        @if (User.Identity.IsAuthenticated && (Model.team.Geek.Username != User.Identity.Name) && test != false)
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-3">
+                    @Html.ActionLink("S'inscrire dans cette équipe", "Create", "TeamGeeks", new { teamID = Model.team.TeamId, teamName = Model.team.Name }, new { @class = "btn btn-outline-success" })
+                </div>
+            </div>
+        }
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+                @Html.ActionLink("Retourner à la liste des équipes", "Index", null, new { @class = " btn btn-outline-dark" })
+            </div>
         </div>
-    }
     </div>
 
 
-    <div class="btn btn-outline-dark col-md-3">
-        @Html.ActionLink("Retourner à la liste des équipes", "Index")
-    </div>

@@ -56,9 +56,9 @@
                     @*@Html.LabelFor(model => model.Deleted, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     
                     <div class="col-md-offset-2 col-md-3">
-                        <div class="btn btn-outline-danger col-md-12">
+                        <div class=" ">
                             
-                            @Html.ActionLink(" Supprimer l'équipe ", "Delete", new { id = Model.TeamId })
+                            @Html.ActionLink(" Supprimer l'équipe ", "Delete", new { id = Model.TeamId }, new { @class = "col-md-12 btn btn-outline-danger" })
                         </div>
                     </div>
 
@@ -80,9 +80,9 @@
             </div>
         }
         <div class="col-md-offset-2 col-md-2">
-            <div class="btn btn-outline-dark">
+            <div class="">
                 
-                @Html.ActionLink(" Retourner à la liste des équipes ", "Index")
+                @Html.ActionLink(" Retourner à la liste des équipes ", "Index", null, new { @class = " btn btn-outline-dark" })
             </div>
         </div>
         @section Scripts {

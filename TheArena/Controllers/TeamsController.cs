@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TheArena.Models;
+using TheArena.ViewModels;
 
 namespace TheArena.Controllers
 {
@@ -30,11 +31,24 @@ namespace TheArena.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Team team = await db.Team.FindAsync(id);
+            List<TeamGeek> teamList = db.TeamGeek.Where(o => o.Team == id).ToList();
+            List<Geek> teamGeekList = new List<Geek>();
+            foreach (var t in teamList)
+            {
+                teamGeekList.Add(t.Geek);
+            }
+            TeamViewModel viewModel = new TeamViewModel
+            {
+                team = team,
+                geekTeamList = teamGeekList,
+                teamList = teamList,
+
+            };
             if (team == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(viewModel);
         }
 
         // GET: Teams/Create
@@ -53,11 +67,16 @@ namespace TheArena.Controllers
         {
             if (ModelState.IsValid)
             {
+                Geek capitaine = db.Geek.Where(g => g.Username == User.Identity.Name).FirstOrDefault();
+                team.Captain = capitaine.GeekId;
+                TeamGeek tg = new TeamGeek();
+                tg.Player = capitaine.GeekId;
+                tg.Team = team.TeamId;
+                db.TeamGeek.Add(tg);
                 db.Team.Add(team);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
             ViewBag.Captain = new SelectList(db.Geek, "GeekId", "Username", team.Captain);
             return View(team);
         }
@@ -115,11 +134,45 @@ namespace TheArena.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+
+            List<TeamGeek> teamgeek = db.TeamGeek.Where( t => t.Team == id).ToList();
+            foreach(TeamGeek tg in teamgeek)
+            {
+                //db.TeamGeek.Remove(tg);
+                tg.Deleted = true;
+            }
+
             Team team = await db.Team.FindAsync(id);
-            db.Team.Remove(team);
+            // db.Team.Remove(team);
+            team.Deleted = true;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        // GET: Teams/Delete/5
+        public async Task<ActionResult> DeleteM(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Geek g = await db.Geek.FindAsync(id);
+            if (g == null)
+            {
+                return HttpNotFound();
+            }
+            return View(g);
+        }
+        [HttpPost, ActionName("DeleteM")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteMember(int id)
+        {
+            TeamGeek tgsuppr = db.TeamGeek.Where(tg => tg.Player == id).FirstOrDefault();
+            tgsuppr.Deleted = true;
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+            
 
         protected override void Dispose(bool disposing)
         {
@@ -128,33 +181,6 @@ namespace TheArena.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        // GET: Teams/Inscription/5
-        public async Task<ActionResult> Inscription(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Team team = await db.Team.FindAsync(id);
-            if (team == null)
-            {
-                return HttpNotFound();
-            }
-            return View(team);
-        }
-
-        //// POST: Teams/Inscription/5
-        [HttpPost, ActionName("Inscription")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> InscriptionConfirmed(int id)
-        {
-            Team team = await db.Team.FindAsync(id);
-            //db.Team.Remove(team);
-
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
         }
     }
 }

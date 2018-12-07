@@ -108,7 +108,7 @@ namespace TheArena.Controllers
                 ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
                 return View(tournament);
             }
-            if(db.Tournament.Where(t => t.Initials == tournament.Initials) != null)
+            if(db.Tournament.Any(t => t.Initials == tournament.Initials))
             {
                 ViewBag.Message = "Les initiales de tournoi est déja pris";
                 ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
@@ -117,7 +117,7 @@ namespace TheArena.Controllers
                 ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
                 return View(tournament);
             }
-            if (db.Tournament.Where(t => t.Name == tournament.Name) != null)
+            if (db.Tournament.Any(t => t.Name == tournament.Name))
             {
                 ViewBag.Message = "Le nom de tournoi est déja pris";
                 ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
@@ -232,6 +232,15 @@ namespace TheArena.Controllers
                 ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
                 return View(tournament);
             }
+            if (db.Tournament.Any(t => t.Name == tournament.Name) && tournament.Name != db.Tournament.Find(tournament.TournamentId).Name) 
+            {
+                ViewBag.Message = "Le nom de tournoi est déja pris";
+                ViewBag.Game = new SelectList(db.Game, "GameId", "Name", tournament.Game);
+                ViewBag.Organiser = new SelectList(db.Geek, "GeekId", "Username", tournament.Organiser);
+                ViewBag.RegisteringPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.RegisteringPeriod);
+                ViewBag.PlayingPeriod = new SelectList(db.Period, "PeriodId", "PeriodId", tournament.PlayingPeriod);
+                return View(tournament);
+            }
             if (ModelState.IsValid)
             {
                 tournament.PeriodRegistration = db.Period.Find(tournament.RegisteringPeriod);
@@ -290,6 +299,19 @@ namespace TheArena.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Participate([Bind(Include ="TeamID")]Team team, [Bind(Include = "TournamentId")]Tournament tournament)
         {
+
+            if(db.TeamGeek.Where(tg => tg.Team == team.TeamId && !tg.Deleted).Count() != db.Tournament.Find(tournament.TournamentId).PlayerNumber)
+            {
+                ViewBag.Message = "Le nombre de membres de l'équipe ne correspond pas aux prérequis du tournois";
+                Tournament tournamentId = db.Tournament.Find(tournament.TournamentId);
+                Geek user = db.Geek.Where(g => g.Username == User.Identity.Name && !g.Deleted).FirstOrDefault();
+                TournamentDetailViewModel viewModel = new TournamentDetailViewModel
+                {
+                    tournament = tournamentId,
+                    geek = user,
+                };
+                return View("Details", viewModel);
+            }
             Participation participation = db.Participation.Where(p => p.Team == team.TeamId && p.Tournament== tournament.TournamentId).FirstOrDefault();
             if (participation != null)
             {

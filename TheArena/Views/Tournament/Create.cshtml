@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="form-group col-3">
-            <label for="tournamentId">Initial du tournoi</label><br>
+            <label for="tournamentId">Initiales du tournoi</label><br>
             @Html.EditorFor(model => model.Initials, new { htmlAttributes = new { @class = "form-control", @placeholder = "Initiales" } })
             @Html.ValidationMessageFor(model => model.Initials, "", new { @class = "text-danger" })
         </div>
@@ -32,7 +32,7 @@
     @Html.ValidationMessageFor(model => model.Game, "", new { @class = "text-danger" })
     <div class="dropdown-divider"></div>
 
-    <h5 class="card-title">Paramètre des équipes</h5>
+    <h5 class="card-title">Paramètres des équipes</h5>
     <div class="form-inline">
         <div class="form-group">
             <label id="playerNumber">Taille des équipes :</label>
@@ -58,7 +58,7 @@
             @Html.ValidationMessageFor(model => model.PeriodRegistration.Ending, "", new { @class = "text-danger", datavalmsgfor = "registeringPeriodEnd" })
         </div>
     </div>
-    <h4><span class="fa fa-clock"></span> Période de jeux</h4>
+    <h4><span class="fa fa-clock"></span> Période de déroulement</h4>
     <div class="form-inline">
         <div class="form-group">
             <label for="playingPeriodStart">Débute le</label>

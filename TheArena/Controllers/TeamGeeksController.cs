@@ -50,18 +50,21 @@ namespace TheArena.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "TeamGeekId,Player,Team,Deleted")] TeamGeek teamGeek)
+        public async Task<ActionResult> Create([Bind(Include = "TeamGeekId,Player,Team,Deleted")] TeamGeek teamGeek, int teamID)
         {
             if (ModelState.IsValid)
             {
+                //teamGeek.Player = 2;
+                Geek geek = db.Geek.Where(g => g.Username == User.Identity.Name).FirstOrDefault();
+                teamGeek.Player = geek.GeekId;
+                teamGeek.Team = teamID;
                 db.TeamGeek.Add(teamGeek);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Teams/Details/"+ teamID);
             }
-
-            //ViewBag.Player = new SelectList(db.Geek, "GeekId", "Username", teamGeek.Player);
-            ViewBag.Player = new SelectList(db.Geek, "GeekId", "Username", teamGeek.Player);
-            ViewBag.Team = new SelectList(db.Team, "TeamId", "Initials", teamGeek.Team);
+            
+            //ViewBag.Player = new SelectList(db.Geek, "GeekId", "Username", User.Identity);
+            //ViewBag.Team = new SelectList(db.Team, "TeamId", "Initials", teamGeek.Team);
             return View(teamGeek);
         }
 
@@ -99,7 +102,7 @@ namespace TheArena.Controllers
             ViewBag.Team = new SelectList(db.Team, "TeamId", "Initials", teamGeek.Team);
             return View(teamGeek);
         }
-
+       
         // GET: TeamGeeks/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
@@ -121,9 +124,10 @@ namespace TheArena.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             TeamGeek teamGeek = await db.TeamGeek.FindAsync(id);
-            db.TeamGeek.Remove(teamGeek);
+            teamGeek.Deleted = true;
+            //db.TeamGeek.Remove(teamGeek);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Teams/Details/"+teamGeek.Team);
         }
 
         protected override void Dispose(bool disposing)
