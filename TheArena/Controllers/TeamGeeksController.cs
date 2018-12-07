@@ -124,9 +124,10 @@ namespace TheArena.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             TeamGeek teamGeek = await db.TeamGeek.FindAsync(id);
-            db.TeamGeek.Remove(teamGeek);
+            teamGeek.Deleted = true;
+            //db.TeamGeek.Remove(teamGeek);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Teams/Details/"+teamGeek.Team);
         }
 
         protected override void Dispose(bool disposing)

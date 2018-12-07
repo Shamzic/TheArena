@@ -41,6 +41,7 @@ namespace TheArena.Controllers
             {
                 team = team,
                 geekTeamList = teamGeekList,
+                teamList = teamList,
 
             };
             if (team == null)
@@ -147,6 +148,31 @@ namespace TheArena.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        // GET: Teams/Delete/5
+        public async Task<ActionResult> DeleteM(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Geek g = await db.Geek.FindAsync(id);
+            if (g == null)
+            {
+                return HttpNotFound();
+            }
+            return View(g);
+        }
+        [HttpPost, ActionName("DeleteM")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteMember(int id)
+        {
+            TeamGeek tgsuppr = db.TeamGeek.Where(tg => tg.Player == id).FirstOrDefault();
+            tgsuppr.Deleted = true;
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+            
 
         protected override void Dispose(bool disposing)
         {

@@ -51,12 +51,39 @@
             </dt>
 
             <dd>
+                @{var gtsaveID = 0; var gsaveID = 0; var gtsaveBool = false; var gtCaptainName = "";}
+
+
                 @foreach (var geek in Model.geekTeamList)
                 {
-                    <p>@geek.Username</p>
-                }
-            </dd>
+                    foreach (var gt in Model.teamList)
+                    {
+                        if (gt.Player == geek.GeekId)
+                        {
+                            gtsaveID = gt.TeamGeekId;
+                            gsaveID = geek.GeekId;
+                            gtsaveBool = gt.Deleted;
 
+                            if (gt.Player == Model.team.Captain)
+                            {
+                                gtCaptainName = geek.Username;
+                            }
+                        }
+                    }
+                    if (gtsaveBool == false)
+                    {
+                <div style="display:inline; margin-right: 20px;">
+                    @geek.Username
+                </div>
+                        
+                        if (@gtsaveID != Model.team.Captain && User.Identity.Name == gtCaptainName)
+                        {
+                            @Html.ActionLink("Supprimer", "Delete", "TeamGeeks", new { id = gtsaveID }, new { @class = "btn btn-outline-danger" })
+                        }
+                        <div style="margin-top: 5px;"/>
+                    }
+                 }
+            </dd>
         </dl>
 
     </div>

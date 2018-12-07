@@ -10,5 +10,6 @@ namespace TheArena.ViewModels
     {
         public Models.Team team { get; set; }
         public List<Models.Geek> geekTeamList { get; set; }
+        public List<Models.TeamGeek> teamList { get; set; }
     }
 }
