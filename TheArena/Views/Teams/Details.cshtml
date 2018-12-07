@@ -61,34 +61,41 @@
 
     </div>
 }
-@if (Model.team.Geek.Username.Equals(User.Identity.Name))
-{
-    <div class="btn btn-outline-primary col-md-3">
+    <div class="form-group">
+        @if (Model.team.Geek.Username.Equals(User.Identity.Name))
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-3">
+                    @Html.ActionLink("Éditer", "Edit", new { id = Model.team.TeamId }, new { @class = "btn btn-outline-primary" })
+                </div>
+            </div>
+        }
 
-        @Html.ActionLink("Éditer", "Edit", new { id = Model.team.TeamId })
-    </div>
-}
-
-@{bool test = true; }
-@foreach (var geek in Model.geekTeamList)
-    {
-    if(geek.Username == (User.Identity.Name))
-    {
-        test = false;
-    }
-}
+        @{bool test = true; }
+        @foreach (var geek in Model.geekTeamList)
+        {
+            if (geek.Username == (User.Identity.Name))
+            {
+                test = false;
+            }
+        }
 
 
-    @if (User.Identity.IsAuthenticated && (Model.team.Geek.Username != User.Identity.Name) && test!=false)
-    {
-        <div class="form-actions no-color">
-            <div class="btn btn-outline-success col-md-3">
-                @Html.ActionLink("S'inscrire dans cette équipe", "Create", "TeamGeeks", new { teamID = Model.team.TeamId, teamName = Model.team.Name}, null)
+        @if (User.Identity.IsAuthenticated && (Model.team.Geek.Username != User.Identity.Name) && test != false)
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-3">
+                    @Html.ActionLink("S'inscrire dans cette équipe", "Create", "TeamGeeks", new { teamID = Model.team.TeamId, teamName = Model.team.Name }, new { @class = "btn btn-outline-success" })
+                </div>
+            </div>
+        }
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+                @Html.ActionLink("Retourner à la liste des équipes", "Index", null, new { @class = " btn btn-outline-dark" })
             </div>
         </div>
-    }
-
-
-    <div class="btn btn-outline-dark col-md-3">
-        @Html.ActionLink("Retourner à la liste des équipes", "Index")
     </div>
+
+
