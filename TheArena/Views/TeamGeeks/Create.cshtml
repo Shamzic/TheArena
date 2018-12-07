@@ -4,7 +4,7 @@
     ViewBag.Title = "S'inscrire dans une équipe";
 }
 
-<h2>S'inscrire dans une équipe</h2>
+<h2>Voulez-vous vous inscrire dans l'équipe @Request.Params["teamName"] ?</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <hr />
+        <hr/>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class = "control-label col-md-2" >Joueur</div>
@@ -20,25 +20,18 @@
                 <input class="form-control" value="@User.Identity.Name" readonly>
             </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Team, "Team", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("Team", null, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="S'inscrire" class="btn btn-default" />
+                        <input type="submit" value="S'inscrire" class="btn btn-outline-success" />
                     </div>
                 </div>
             </div>
         }
-
-        <div>
-            @Html.ActionLink("Retourner à la liste des équipes", "Index", "Teams")
+    <div class="col-md-offset-2 col-md-10">
+        <div class="">
+            @Html.ActionLink("Retourner à la liste des équipes", "Index", "Teams", null, new { @class = " btn btn-outline-dark" })
         </div>
+    </div>
 
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")

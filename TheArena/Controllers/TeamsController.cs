@@ -64,13 +64,15 @@ namespace TheArena.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "TeamId,Initials,Name,Tags,Captain,Deleted")] Team team)
         {
+
             if (ModelState.IsValid)
             {
+                Geek capitaine = db.Geek.Where(g => g.Username == User.Identity.Name).FirstOrDefault();
+                team.Captain = capitaine.GeekId;
                 db.Team.Add(team);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
             ViewBag.Captain = new SelectList(db.Geek, "GeekId", "Username", team.Captain);
             return View(team);
         }
@@ -141,33 +143,6 @@ namespace TheArena.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        // GET: Teams/Inscription/5
-        public async Task<ActionResult> Inscription(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Team team = await db.Team.FindAsync(id);
-            if (team == null)
-            {
-                return HttpNotFound();
-            }
-            return View(team);
-        }
-
-        //// POST: Teams/Inscription/5
-        [HttpPost, ActionName("Inscription")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> InscriptionConfirmed(int id)
-        {
-            Team team = await db.Team.FindAsync(id);
-            //db.Team.Remove(team);
-
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
         }
     }
 }

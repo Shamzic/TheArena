@@ -50,16 +50,17 @@ namespace TheArena.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "TeamGeekId,Player,Team,Deleted")] TeamGeek teamGeek)
+        public async Task<ActionResult> Create([Bind(Include = "TeamGeekId,Player,Team,Deleted")] TeamGeek teamGeek, int teamID)
         {
             if (ModelState.IsValid)
             {
                 //teamGeek.Player = 2;
                 Geek geek = db.Geek.Where(g => g.Username == User.Identity.Name).FirstOrDefault();
                 teamGeek.Player = geek.GeekId;
+                teamGeek.Team = teamID;
                 db.TeamGeek.Add(teamGeek);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Teams");
+                return RedirectToAction("Index", "Teams/Details/"+ teamID);
             }
             
             //ViewBag.Player = new SelectList(db.Geek, "GeekId", "Username", User.Identity);
