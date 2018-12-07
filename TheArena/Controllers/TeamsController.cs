@@ -69,6 +69,10 @@ namespace TheArena.Controllers
             {
                 Geek capitaine = db.Geek.Where(g => g.Username == User.Identity.Name).FirstOrDefault();
                 team.Captain = capitaine.GeekId;
+                TeamGeek tg = new TeamGeek();
+                tg.Player = capitaine.GeekId;
+                tg.Team = team.TeamId;
+                db.TeamGeek.Add(tg);
                 db.Team.Add(team);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

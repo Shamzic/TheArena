@@ -6,13 +6,17 @@
 
 <h2>Équipes enregistrées</h2>
 
-<h2  class="">
-    @Html.ActionLink("Créer une nouvelle équipe", "Create", null, new { @class = "btn btn-outline-success" })
-</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <h2 class="">
+        @Html.ActionLink("Créer une nouvelle équipe", "Create", null, new { @class = "btn btn-outline-success" })
+    </h2>
+}
+
 <table class="table">
     <tr>
         <th>
-           <h5>Capitaine</h5>
+            <h5>Capitaine</h5>
         </th>
         <th>
             <h5>Initiales</h5>
@@ -23,36 +27,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Geek.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Initials)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td >
-            <div class="container">
-                <div class="row">
-                <div class="col col-lg-2 ">
-                    @Html.ActionLink("Détails", "Details", new { id = item.TeamId }, new { @class = "btn btn-outline-primary" })
-                </div>
-                @if (item.Geek.Username.Equals(User.Identity.Name))
-                    {
-                        <div class="col col-lg-2">
-                            @Html.ActionLink("Éditer", "Edit", new { id = item.TeamId }, new { @class = "btn btn-outline-primary" })
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Geek.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Initials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-lg-2 ">
+                            @Html.ActionLink("Détails", "Details", new { id = item.TeamId }, new { @class = "btn btn-outline-primary" })
                         </div>
-                        <div class="col col-lg-2">
-                            @Html.ActionLink("Supprimer", "Delete", new { id = item.TeamId }, new { @class = "btn btn-outline-danger" })
-                        </div>
-                    }
+                        @if (item.Geek.Username.Equals(User.Identity.Name))
+                        {
+                            <div class="col col-lg-2">
+                                @Html.ActionLink("Éditer", "Edit", new { id = item.TeamId }, new { @class = "btn btn-outline-primary" })
+                            </div>
+                            <div class="col col-lg-2">
+                                @Html.ActionLink("Supprimer", "Delete", new { id = item.TeamId }, new { @class = "btn btn-outline-danger" })
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
-        </td>
-    </tr>
-}
+            </td>
+        </tr>
+    }
 
 </table>
