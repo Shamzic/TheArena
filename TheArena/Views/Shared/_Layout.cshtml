@@ -22,38 +22,46 @@
 
 
                     <form class="form-inline input-group my-2 my-lg-0 col-lg-5" method="GET" action="/search">
-                        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                        @using (Html.BeginForm("Details", "Search", FormMethod.Get))
     {
 
                     @Html.TextBox("search", null, new { @class = "form-control mr-sm-2 search" }) <button class="btn btn-outline-success search-button my-0" type="submit"><span class="fas fa-search"></span> </button>
-
+                   
+                    <a class="nav-link" href="@Url.Action("Details", "Search")">
+                        Recherche avancée
+                    </a>
 
 }
-                       
+
                     </form>
-                    @Html.ActionLink("Recherche Avancée", "Search", "Advanced", new { @class = "nav-link" })
+                    @using (Html.BeginForm("Details", "Search", FormMethod.Get))
+    {
+                    
+
+}
+
                     <ul class="nav col justify-content-end">
                         @if (User.Identity.IsAuthenticated)
-        {
-                <li class="nav-link">Bienvenue <b><a href="@Url.Action("Index", "Geeks")">@User.Identity.Name </a> </b></li>
-                <li>
-                    <a class="nav-link" href="@Url.Action("Edit", "Geeks", new {id = User.Identity.Name })"><span class="fas fa-cog"></span></a>
-                </li>
-                <li>
-                    <a class="btn btn-outline-success my-2 my-sm-0" href="@Url.Action("Logout","Login")">Se déconnecter</a>
-                </li>
+    {
+                    <li class="nav-link">Bienvenue <b><a href="@Url.Action("Index", "Geeks")">@User.Identity.Name </a> </b></li>
+                    <li>
+                        <a class="nav-link" href="@Url.Action("Edit", "Geeks", new {id = User.Identity.Name })"><span class="fas fa-cog"></span></a>
+                    </li>
+                    <li>
+                        <a class="btn btn-outline-success my-2 my-sm-0" href="@Url.Action("Logout","Login")">Se déconnecter</a>
+                    </li>
 }
 else
 {
-                <li>
-                    <a class="btn btn-outline-success my-2 my-sm-0" href="@Url.Action("Index","Login")">Se connecter</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="@Url.Action("Register","Login")">S'enregistrer</a>
-                </li>
+                    <li>
+                        <a class="btn btn-outline-success my-2 my-sm-0" href="@Url.Action("Index","Login")">Se connecter</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="@Url.Action("Register","Login")">S'enregistrer</a>
+                    </li>
 }
                     </ul>
-                </div>
+</div>
             </div>
         </div>
     </nav>

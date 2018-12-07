@@ -1,7 +1,7 @@
 @model TheArena.ViewModels.MultipleSearch
 @{ ViewBag.Title = "MultipleSearch";}
 
-@if (!Model.geekss.Any() && !Model.gamess.Any()  && !Model.tournamentss.Any())
+@if (!Model.geekss.Any() && !Model.gamess.Any()  && !Model.tournamentss.Any() )
 {
     <p>Aucun résultat trouvé.</p>
 }
@@ -93,6 +93,7 @@
                 <td>
                     @item.PlayerNumber
                 </td>
+
             </tr>
         }
     </table>
@@ -111,6 +112,7 @@
 </tr>
     @foreach (var item in Model.teamss)
     {
+      
         <tr>
             <td>
                 @item.Name

@@ -1,75 +1,226 @@
-﻿@model TheArena.Models.Geek
+﻿@model TheArena.ViewModels.AdvancedSearchViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "AdvancedSearchViewModel";
 }
 
+<p>Que voulez vous chercher?</p>
 
-<h2>Details</h2>
+@using (Html.BeginForm("Details", "Search", FormMethod.Get))
+{
+    <div>
+
+        @Html.TextBox("name") <input id="submit" type="submit" value="Filter" class="btn btn-success">
+        <br />
+        <br />
+        
+    </div>
+
+
+}
+
+<p>Dans quelle section voulez vous chercher ?</p>
 
 <div>
-    <h4>Geek</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
+    <input type="checkbox" onclick="showGeek()" id="checkbox" name="Geeks" checked>
 
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Surname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Surname)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Birthdate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Birthdate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Deleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Deleted)
-        </dd>
-
-    </dl>
+    <label for="Geeks">Geeks</label>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.GeekId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+<div>
+    <input type="checkbox" onclick="showTournament()" id="checkbox1" name="Tournaments" checked>
+    <label for="Tournaments">Tournaments</label>
+</div>
+
+<div>
+    <input type="checkbox" onclick="showTeam()" id="checkbox2" name="Teams" checked>
+    <label for="Teams">Teams</label>
+</div>
+
+<div>
+    <input type="checkbox" onclick="showGame()" id="checkbox3" name="Games" checked>
+    <label for="Games">Games</label>
+</div>
+
+<div id="g">
+    <h2>Geeks</h2>
+
+   
+
+
+
+
+    <table class="table">
+        <tr>
+            <th>Username</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Date de naissance</th>
+        </tr>
+
+
+
+        @foreach (var item in Model.geekss)
+        {
+            <tr>
+                <td>
+                    @item.Username
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Surname
+                </td>
+                <td>
+                    @item.Mail
+                </td>
+                <td>
+                    @item.Birthdate
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+<div id="tournament">
+
+
+    <br />
+    <br />
+    <h2>Tournaments</h2>
+
+
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Sigle</th>
+            <th>Règles</th>
+            <th>Taille des équipes</th>
+        </tr>
+        @foreach (var item in Model.tournamentss)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Initials
+                </td>
+                <td>
+                    @item.Rules
+                </td>
+                <td>
+                    @item.PlayerNumber
+                </td>
+            </tr>
+        }
+    </table>
+
+
+</div>
+
+
+<div id="team">
+    <br />
+    <br />
+    <h2>Teams</h2>
+
+
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Sigle</th>
+            <th>Capitaine</th>
+        </tr>
+        @foreach (var item in Model.teamss)
+        {
+
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Initials
+                </td>
+                <td>
+                    @item.Captain
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+<div id="game">
+    <br />
+    <br />
+    <h2>Games</h2>
+
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Limite d'âge</th>
+        </tr>
+        @foreach (var item in Model.gamess)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.AgeLimit
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+
+<script>
+    function showGeek() {
+        if (document.getElementById("checkbox").checked ) {
+            document.getElementById('g').style.display = 'block';
+        }
+        else {
+            document.getElementById('g').style.display = 'none';
+
+        }
+    }
+
+    function showTournament() {
+        if (document.getElementById("checkbox1").checked ) {
+            document.getElementById('tournament').style.display = 'block';
+
+        }
+        else {
+            document.getElementById('tournament').style.display = 'none';
+        }
+    }
+
+    function showTeam() {
+        if (document.getElementById("checkbox2").checked ) {
+            document.getElementById('team').style.display = 'block';
+
+        }
+        else {
+            document.getElementById('team').style.display = 'none';
+        }
+    }
+
+    function showGame() {
+        if (document.getElementById("checkbox3").checked ) {
+            document.getElementById('game').style.display = 'block';
+        }
+        else {
+            document.getElementById('game').style.display = 'none';
+
+        }
+    }
+</script>
+
