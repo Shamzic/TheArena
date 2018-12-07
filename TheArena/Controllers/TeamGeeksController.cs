@@ -102,7 +102,7 @@ namespace TheArena.Controllers
             ViewBag.Team = new SelectList(db.Team, "TeamId", "Initials", teamGeek.Team);
             return View(teamGeek);
         }
-
+       
         // GET: TeamGeeks/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {

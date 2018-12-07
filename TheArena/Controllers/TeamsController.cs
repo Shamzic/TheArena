@@ -130,6 +130,13 @@ namespace TheArena.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+
+            List<TeamGeek> teamgeek = db.TeamGeek.Where( t => t.Team == id).ToList();
+            foreach(TeamGeek tg in teamgeek)
+            {
+                db.TeamGeek.Remove(tg);
+            }
+
             Team team = await db.Team.FindAsync(id);
             db.Team.Remove(team);
             await db.SaveChangesAsync();
