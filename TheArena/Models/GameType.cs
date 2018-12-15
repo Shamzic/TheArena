@@ -1,5 +1,6 @@
 namespace TheArena.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -26,8 +27,10 @@ namespace TheArena.Models
         [StringLength(255)]
         public string Description { get; set; }
 
+        [JsonIgnore]
         public bool Deleted { get; set; }
 
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Game { get; set; }
     }

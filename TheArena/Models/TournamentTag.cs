@@ -1,5 +1,6 @@
 namespace TheArena.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -17,8 +18,10 @@ namespace TheArena.Models
         [StringLength(255)]
         public string Tag { get; set; }
 
+        [JsonIgnore]
         public bool Deleted { get; set; }
 
+        [JsonIgnore]
         public virtual Tournament Tournament1 { get; set; }
     }
 }
