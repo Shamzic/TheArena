@@ -11,7 +11,7 @@ namespace TheArena
         public static void Register(HttpConfiguration configuration)
         {
             
-            configuration.Routes.MapHttpRoute("API Default", "api/{controller}/{action}/{id}",
+            configuration.Routes.MapHttpRoute("API Default", "api/{controller}/{id}",
                 new { id = RouteParameter.Optional });
         }
     }
