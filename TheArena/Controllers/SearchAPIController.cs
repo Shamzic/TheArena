@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TheArena.BLL;
 using TheArena.Models;
 using TheArena.ViewModels;
 
@@ -11,7 +12,7 @@ namespace TheArena.Controllers
 {
     public class SearchAPIController : ApiController
     {
-        private SearchController search = new SearchController();
+        private SearchBLL search = new SearchBLL();
 
         [HttpGet]
         public IHttpActionResult SimpleSearch(string id)
